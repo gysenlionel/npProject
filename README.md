@@ -11,11 +11,11 @@ An event website eshop concert and music news
 ![register](https://user-images.githubusercontent.com/90910874/150365302-5283a87c-c33b-47bc-8912-8f2d8efc9915.png)
 ### Connection
 ![connexion](https://user-images.githubusercontent.com/90910874/150365492-a3ee2afd-a568-4fda-810e-785f3a4daccc.png)
-###event
+### event
 ![event](https://user-images.githubusercontent.com/90910874/150365560-e2221b41-8aa0-4a5b-a8fd-13049d384551.png)
-###card
+### card
 ![card](https://user-images.githubusercontent.com/90910874/150365588-05955fab-ccb1-40fd-b54f-e576aca857ae.png)
-###profil
+### profil
 ![profil](https://user-images.githubusercontent.com/90910874/150365643-4702e4f3-c00b-4582-b524-cbcdd1216957.png)
 ## Graphic charter
 ### Typography 

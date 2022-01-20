@@ -4,19 +4,31 @@ const Post = require('../models/Post.model')
 // resolvers
 const resolvers = {
     Query: {
-        hello: () => {
-            return 'Hello World'
-        },
         getAll: async () => {
             return await Post.find()
         },
+        post: (_, { ID }) => {
+            Post.findById(ID)
+        },
     },
     Mutation: {
-        createPost: async (parent, args, context, info) => {
-            const { title, description } = args.post
-            const post = await new Post({ title, description }).save()
-            return post
-        },
+        async createPost(_, { postInput: {
+            title, description, username
+        } }) {
+            const newPost = new Post({
+                title: title,
+                description: description,
+                createdBy: username,
+                createdAt: new Date().toISOString()
+            })
+            const res = await newPost.save()
+            console.log(res)
+            return {
+                id: res.id,
+                ...res._doc
+            }
+        }
     },
 }
 module.exports = resolvers
+

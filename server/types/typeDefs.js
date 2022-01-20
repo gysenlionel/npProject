@@ -2,24 +2,46 @@ const { gql } = require('apollo-server-express')
 
 // queries
 const typeDefs = gql`
-type Post{
-    id: ID
-    title: String
-    description: String
+type Message{
+    text: String
+    createdAt: String
+    createdBy: String
 }
 
-    type Query{
-        hello: String
-        getAll: [Post]
+type User {
+    username: String
+    email: String
+    password: String
+    token: String
+}
+
+input RegisterInput {
+    username: String
+    email: String
+    password: String
+}
+
+input LoginInput {
+    email: String
+    password: String
+}
+
+input MessageInput{
+        text: String
+        username: String
     }
 
-    input PostInput{
-        title:String
-        description:String
+    type Query{
+        message(id: ID!): Message
+        user(id: ID!): User
+        # getAll: [Message]
     }
+
 
     type Mutation{
-        createPost(post:PostInput):Post
+        createMessage(messageInput: MessageInput): Message!
+        registerUser(registerInput: RegisterInput): User!
+        loginUser(loginInput: LoginInput): User!
     }
     `
 

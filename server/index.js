@@ -3,7 +3,7 @@ const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 const mongoose = require('mongoose')
 const typeDefs = require('./types/typeDefs')
-const resolvers = require('./resolvers/resolvers')
+const resolvers = require('./resolvers')
 
 
 // connection mongoDB
@@ -22,6 +22,6 @@ const startServer = async () => {
     })
     await apolloServer.start()
     apolloServer.applyMiddleware({ app: app })
-    app.listen(process.env.PORT || 4000, () => console.log('Server UP & running *4000'))
+    app.listen(process.env.PORT || 3001, () => console.log('Server UP & running 3001'))
 }
 startServer()

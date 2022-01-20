@@ -19,10 +19,13 @@ An event website eshop concert and music news
 ![profil](https://user-images.githubusercontent.com/90910874/150365643-4702e4f3-c00b-4582-b524-cbcdd1216957.png)
 ## Graphic charter
 ### Typography 
+
 - Playfair Display
+
 ![display](https://user-images.githubusercontent.com/90910874/150366271-1eb294f4-2107-4f09-8a07-fa8d73b952b8.png)
 
 - abel
+
 ![abel](https://user-images.githubusercontent.com/90910874/150366386-0a3dfefd-2af0-4a5e-970e-037cd18ba650.png)
 
 ### Colors

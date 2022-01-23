@@ -2,9 +2,11 @@ import React from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { Grid, Container } from '@mui/material'
+import axios from 'axios'
+import { gql, useMutation } from '@apollo/client'
+
 import TextfieldWrapper from '../../components/FormUi/Textfield/Textfield'
 import Submit from '../../components/FormUi/Submit/Submit'
-import axios from 'axios'
 import SelectWrapper from '../../components/FormUi/SelectWrapper/SelectWrapper'
 import countries from '../../data/countries.json'
 const Formulaire = () => {
@@ -36,6 +38,13 @@ const Formulaire = () => {
     country: Yup.string().required('Required'),
   })
 
+  // state apollo
+  const [addUser, { loading }] = useMutation(REGISTER_USER, {
+    update(proxy, result) {
+      console.log(result)
+    },
+    variables: INITIAL_FORM_STATE,
+  })
   return (
     <Grid container sx={{ mt: 4 }}>
       <Grid item xs={12}>
@@ -54,32 +63,9 @@ const Formulaire = () => {
                 const city = values.city
                 const country = values.country
 
-                //    fetch
-                await axios({
-                  method: 'post',
-                  url: ``,
-                  data: {
-                    firstname,
-                    lastname,
-                    username,
-                    email,
-                    password,
-                    city,
-                    country,
-                  },
-                })
-                  .then((res) => {
-                    if (res.data.erros) {
-                      // renvoi les erreurs
-                      console.log(res.data.errors.email)
-                    } else {
-                      // redirigé si submit
-                      console.log('submit')
+                addUser()
 
-                      // window.location = '/'
-                    }
-                  })
-                  .catch((err) => console.log(err))
+                //    fetch
               }}
             >
               <Form>
@@ -139,5 +125,45 @@ const Formulaire = () => {
     </Grid>
   )
 }
+
+// graphql data
+const REGISTER_USER = gql`
+  mutation register(
+    $firstname: String!
+    $lastname: String!
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+    $address: String!
+    $city: String!
+    $country: String!
+  ) {
+    register(
+      registerInput: {
+        firstname: $firstname
+        lastname: $lastname
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+        address: $address
+        city: $city
+        country: $country
+      }
+    ) {
+      id
+      email
+      username
+      fistname
+      lastname
+      address
+      city
+      country
+      createdAt
+      token
+    }
+  }
+`
 
 export default Formulaire

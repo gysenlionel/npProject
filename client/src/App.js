@@ -1,11 +1,14 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import "./styles/App.css";
+
 import Navbar from "./components/Header/Navbar";
 import Formulaire from "./pages/Formulaire/Formulaire";
 import Login from "./pages/Login/Login";
 import Home from './pages/Home/Home'
 import NotFound from './pages/NotFound/NotFound'
+
 function App() {
   return (
     <div className="App">

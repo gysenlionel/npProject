@@ -1,8 +1,19 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import { Button, makeStyles } from '@material-ui/core'
 import { useFormikContext } from 'formik'
 
+const useStyles = makeStyles({
+  button: {
+    backgroundColor: '#86C4BA',
+    color: '#F3F3F3',
+    '&:hover': {
+      backgroundColor: '#7FC8A9',
+    },
+  },
+})
+
 const Submit = ({ children, ...otherProps }) => {
+  const classes = useStyles()
   // submit form du hook de fornik
   const { submitForm } = useFormikContext()
 
@@ -12,11 +23,14 @@ const Submit = ({ children, ...otherProps }) => {
 
   const configButton = {
     variant: 'contained',
-    color: 'primary',
     fullWidth: true,
     onClick: handleSubmit,
   }
-  return <Button {...configButton}>{children}</Button>
+  return (
+    <Button className={classes.button} {...configButton}>
+      {children}
+    </Button>
+  )
 }
 
 export default Submit

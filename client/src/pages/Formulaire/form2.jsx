@@ -29,33 +29,30 @@ const Formulaire = () => {
   const [country, setCountry] = useState('')
 
   // state apollo
-  const [addUser] = useMutation(REGISTER_USER, {
-    update(_, result) {
-      console.log(result)
-      // this.props.history.push('/')
-    },
-    onError(err) {
-      setErrors(err.graphQLErrors[0].extensions.errors)
-    },
-    variables: {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      username: username,
-      password: password,
-      confirmPassword: confirmPassword,
-      address: address,
-      city: city,
-      country: country,
-    },
-  })
+  const [addUser] = useMutation(REGISTER_USER)
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    addUser()
-  }
+    const { data } = await addUser({
+      onError(err) {
+        console.log(err.graphQLErrors[0].extensions.errors)
+        setErrors(err.graphQLErrors[0].extensions.errors)
+      },
+      variables: {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        username: username,
+        password: password,
+        confirmPassword: confirmPassword,
+        address: address,
+        city: city,
+        country: country,
+      },
+    })
 
-  // console.log(data.registerInput)
+    // console.log(data.registerInput)
+  }
 
   return (
     <Grid container sx={{ mt: 4 }}>

@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client'
 
+import './fonts/Telex/Telex-Regular.ttf'
+import './fonts/abel/Abel-Regular.ttf'
 import './index.css';
 
 import App from './App'

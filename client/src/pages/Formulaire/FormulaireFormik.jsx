@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { Grid, Container } from '@mui/material'
 import { gql, useMutation } from '@apollo/client'
+import { makeStyles } from '@material-ui/core'
 
 import { AuthContext } from '../../context/auth'
 
@@ -13,13 +14,37 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ErrorIcon from '@mui/icons-material/Error'
 
-import './Formulaire.css'
-
 import TextfieldWrapper from '../../components/FormUi/Textfield/Textfield'
 import Submit from '../../components/FormUi/Submit/Submit'
 import SelectWrapper from '../../components/FormUi/SelectWrapper/SelectWrapper'
 import countries from '../../data/countries.json'
+
+const useStyles = makeStyles((theme) => ({
+  error: {
+    color: '#da1212',
+  },
+
+  background: {
+    height: '100%',
+    backgroundColor: '#cedebd',
+    color: 'black',
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  formulaire__form: {
+    borderRadius: '6px / 8px',
+    padding: '2%',
+    marginBottom: '6%',
+    backgroundColor: '#fff',
+  },
+  sign: {
+    color: '#86C4BA',
+    textAlign: 'center',
+  },
+}))
 const Formulaire = () => {
+  const classes = useStyles()
   // context data user
   const context = useContext(AuthContext)
   // errors
@@ -57,9 +82,9 @@ const Formulaire = () => {
   const [addUser] = useMutation(REGISTER_USER)
 
   return (
-    <Grid container sx={{ pt: 4 }} className="background">
+    <Grid container sx={{ pt: 4 }} className={classes.background}>
       <Grid item xs={12}>
-        <Container maxWidth="md">
+        <Container maxWidth="sm">
           <div>
             <Formik
               initialValues={{ ...INITIAL_FORM_STATE }}
@@ -95,29 +120,46 @@ const Formulaire = () => {
                 // return null
               }}
             >
-              <Form className="formulaire__form">
+              <Form className={classes.formulaire__form}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <div>Fill in your details</div>
+                    <div className={classes.sign}>Fill in your details</div>
                   </Grid>
                   <Grid item xs={6}>
-                    <TextfieldWrapper name="firstName" label="First Name" />
+                    <TextfieldWrapper
+                      name="firstName"
+                      label="First Name"
+                      fullWidth={true}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextfieldWrapper name="lastName" label="Last Name" />
+                    <TextfieldWrapper
+                      name="lastName"
+                      label="Last Name"
+                      fullWidth={true}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextfieldWrapper name="username" label="User Name" />
+                    <TextfieldWrapper
+                      name="username"
+                      label="User Name"
+                      fullWidth={true}
+                    />
                   </Grid>
 
                   <Grid item xs={6}>
-                    <TextfieldWrapper name="email" label="Email" />
+                    <TextfieldWrapper
+                      name="email"
+                      label="Email"
+                      fullWidth={true}
+                    />
                   </Grid>
                   <Grid item xs={6}>
                     <TextfieldWrapper
                       name="password"
                       label="Password"
                       type="password"
+                      fullWidth={true}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -125,19 +167,29 @@ const Formulaire = () => {
                       name="confirmPassword"
                       label="Password Confirm"
                       type="password"
+                      fullWidth={true}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextfieldWrapper name="address" label="Address" />
+                    <TextfieldWrapper
+                      name="address"
+                      label="Address"
+                      fullWidth={true}
+                    />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextfieldWrapper name="city" label="City" />
+                    <TextfieldWrapper
+                      name="city"
+                      label="City"
+                      fullWidth={true}
+                    />
                   </Grid>
                   <Grid item xs={6}>
                     <SelectWrapper
                       name="country"
                       options={countries}
                       label="Country"
+                      fullWidth={true}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -146,24 +198,30 @@ const Formulaire = () => {
                         sx={{
                           width: '100%',
                           maxWidth: 360,
-                          bgcolor: '#d5eebb',
                         }}
                         aria-label="contacts"
                       >
                         {Object.values(errors).map((value) => (
                           <ListItem disablePadding key={`${value}-padd`}>
-                            <ListItemButton key={`${value}-butt`}>
+                            <ListItemButton
+                              key={`${value}-butt`}
+                              sx={{
+                                '&:hover': {
+                                  bgcolor: 'transparent',
+                                },
+                              }}
+                            >
                               <ListItemIcon key={`${value}-icon`}>
                                 <ErrorIcon
                                   key={`${value}-err`}
-                                  className="error"
+                                  className={classes.error}
                                 />
                               </ListItemIcon>
 
                               <ListItemText
                                 key={value}
                                 primary={value}
-                                className="error"
+                                className={classes.error}
                               />
                             </ListItemButton>
                           </ListItem>

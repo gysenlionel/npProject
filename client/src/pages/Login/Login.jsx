@@ -3,8 +3,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { Grid, Container } from '@mui/material'
 import { gql, useMutation } from '@apollo/client'
-
-import './Login.css'
+import { makeStyles } from '@material-ui/core'
 
 import { AuthContext } from '../../context/auth'
 
@@ -17,11 +16,36 @@ import ErrorIcon from '@mui/icons-material/Error'
 
 import TextfieldWrapper from '../../components/FormUi/Textfield/Textfield'
 import Submit from '../../components/FormUi/Submit/Submit'
+
+const useStyles = makeStyles((theme) => ({
+  sign: {
+    color: '#86C4BA',
+  },
+  error: {
+    color: '#da1212',
+  },
+
+  login__background: {
+    color: 'black',
+    backgroundColor: '#cedebd',
+    height: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  login__form: {
+    borderRadius: '6px / 8px',
+    padding: '2%',
+    backgroundColor: '#fff',
+  },
+}))
 const Login = () => {
   // context pour data user
   const context = useContext(AuthContext)
   // errors
   const [errors, setErrors] = useState({})
+  // style material ui
+  const classes = useStyles()
 
   const INITIAL_FORM_STATE = {
     email: '',
@@ -39,9 +63,9 @@ const Login = () => {
   const [loginUser] = useMutation(LOGIN_USER)
 
   return (
-    <Grid container sx={{ pt: 4 }} className="login__background">
+    <Grid container sx={{ pt: 4 }} className={classes.login__background}>
       <Grid item xs={12}>
-        <Container maxWidth="md">
+        <Container maxWidth="sm">
           <div>
             <Formik
               initialValues={{ ...INITIAL_FORM_STATE }}
@@ -64,10 +88,16 @@ const Login = () => {
                 window.location = '/'
               }}
             >
-              <Form className="login__form">
-                <Grid container spacing={2}>
+              <Form className={classes.login__form}>
+                <Grid
+                  container
+                  spacing={2}
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                >
                   <Grid item xs={12}>
-                    <div>Connect</div>
+                    <div className={classes.sign}>Sign In</div>
                   </Grid>
 
                   <Grid item xs={12}>
@@ -87,24 +117,30 @@ const Login = () => {
                         sx={{
                           width: '100%',
                           maxWidth: 360,
-                          bgcolor: '#d5eebb',
                         }}
                         aria-label="contacts"
                       >
                         {Object.values(errors).map((value) => (
                           <ListItem disablePadding key={`${value}-padd`}>
-                            <ListItemButton key={`${value}-butt`}>
+                            <ListItemButton
+                              key={`${value}-butt`}
+                              sx={{
+                                '&:hover': {
+                                  bgcolor: 'transparent',
+                                },
+                              }}
+                            >
                               <ListItemIcon key={`${value}-icon`}>
                                 <ErrorIcon
                                   key={`${value}-err`}
-                                  className="error"
+                                  className={classes.error}
                                 />
                               </ListItemIcon>
 
                               <ListItemText
                                 key={value}
                                 primary={value}
-                                className="error"
+                                className={classes.error}
                               />
                             </ListItemButton>
                           </ListItem>

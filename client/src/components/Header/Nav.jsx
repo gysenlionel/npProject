@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
   typo: {
     fontFamily: 'Abel',
     color: '#fff',
+    textShadow: '0px 1px 4px black ',
+    fontWeight: 'bold',
   },
   navlink: {
     color: '#fff',
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   navlinksm: {
     color: '#757575',
     textDecoration: 'none',
+    '&:hover': { color: '#1572A1', fontWeight: 'bold' },
   },
   fullLogo: {
     textAlign: 'center',
@@ -64,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     marginRight: theme.spacing(8),
+    '&:hover': { color: '#1572A1' },
   },
   linkDrawer: {
     [theme.breakpoints.up('sm')]: {
@@ -72,9 +76,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
   },
   disconnect: {
-    display: 'flex',
-    justifyContent: 'flex-start',
+    color: '#757575',
     cursor: 'pointer',
+    '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    [theme.breakpoints.up('sm')]: {
+      margin: 'auto',
+      '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    },
   },
   linksLg: {
     display: 'none',
@@ -89,6 +97,41 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  drawerPaper: {
+    width: '45%',
+    paddingTop: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      width: '25%',
+      display: 'flex',
+      alignItems: 'center',
+      paddingTop: theme.spacing(3),
+    },
+  },
+  login: {
+    cursor: 'pointer',
+    '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    [theme.breakpoints.up('sm')]: {
+      margin: 'auto',
+      '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    },
+  },
+  borderB: {
+    width: '100%',
+    borderBottom: '1px solid #757575',
+    [theme.breakpoints.up('sm')]: {
+      width: '80%',
+      borderBottom: '1px solid #757575',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+  },
+  borderBLastItem: {
+    [theme.breakpoints.up('sm')]: {
+      borderBottom: 'none',
+    },
+    width: '100%',
+    borderBottom: '1px solid #757575',
   },
 }))
 
@@ -152,36 +195,64 @@ const Nav = () => {
           onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
           anchor="right"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
         >
-          <NavLink to="events" className={classes.navlinksm}>
-            <div className={classes.linkDrawer}>
+          <span className={classes.borderBLastItem}>
+            <NavLink to="events" className={classes.navlinksm}>
+              <div className={classes.linkDrawer}>
+                <ListItem>
+                  <div>Events</div>
+                </ListItem>
+              </div>
+            </NavLink>
+          </span>
+          <span className={classes.borderBLastItem}>
+            <NavLink to="news" className={classes.navlinksm}>
+              <div className={classes.linkDrawer}>
+                <ListItem className={classes.linkDrawer}>
+                  <div>News</div>
+                </ListItem>
+              </div>
+            </NavLink>
+          </span>
+          <span className={classes.borderBLastItem}>
+            <NavLink to="shopping" className={classes.navlinksm}>
+              <div className={classes.linkDrawer}>
+                <ListItem className={classes.linkDrawer}>
+                  <div>Shopping list</div>
+                </ListItem>
+              </div>
+            </NavLink>
+          </span>
+          {/* Changé liens !!! */}
+          <span className={classes.borderB}>
+            <NavLink to="shopping" className={classes.navlinksm}>
               <ListItem>
-                <div>Events</div>
+                <div>About us</div>
               </ListItem>
-            </div>
-          </NavLink>
-          <NavLink to="news" className={classes.navlinksm}>
-            <div className={classes.linkDrawer}>
-              <ListItem className={classes.linkDrawer}>
-                <div>News</div>
+            </NavLink>
+          </span>
+          <span className={classes.borderB}>
+            <NavLink to="shopping" className={classes.navlinksm}>
+              <ListItem>
+                <div>Contact us</div>
               </ListItem>
-            </div>
-          </NavLink>
-          <NavLink to="shopping" className={classes.navlinksm}>
-            <div className={classes.linkDrawer}>
-              <ListItem className={classes.linkDrawer}>
-                <div>Shopping list</div>
-              </ListItem>
-            </div>
-          </NavLink>
+            </NavLink>
+          </span>
           {user ? (
-            <ListItem className={classes.disconnect} onClick={logout}>
-              <div>Logout</div>
-            </ListItem>
+            <span className={classes.borderB}>
+              <ListItem onClick={logout}>
+                <div className={classes.disconnect}>Logout</div>
+              </ListItem>
+            </span>
           ) : (
-            <ListItem>
-              <div>Login</div>
-            </ListItem>
+            <span className={classes.borderB}>
+              <ListItem>
+                <div className={classes.login}>Login</div>
+              </ListItem>
+            </span>
           )}
         </Drawer>
       </Toolbar>

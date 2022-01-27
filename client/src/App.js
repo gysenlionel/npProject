@@ -8,7 +8,6 @@ import { AuthProvider } from "./context/auth";
 
 
 import Nav from './components/Header/Nav'
-import Navbar from "./components/Header/Navbar";
 import FormulaireFormik from './pages/Formulaire/FormulaireFormik'
 import Login from "./pages/Login/Login";
 import Home from './pages/Home/Home'

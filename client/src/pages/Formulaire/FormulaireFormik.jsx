@@ -25,11 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   background: {
-    height: '100%',
-    backgroundColor: '#cedebd',
     color: 'black',
-    display: 'flex',
-    alignItems: 'center',
+    // display: 'flex',
+    // alignItems: 'center',
   },
 
   formulaire__form: {
@@ -37,10 +35,20 @@ const useStyles = makeStyles((theme) => ({
     padding: '2%',
     marginBottom: '6%',
     backgroundColor: '#fff',
+    boxShadow: '1px 1px 10px grey, -1px -1px 10px grey',
   },
   sign: {
     color: '#86C4BA',
+    textShadow: '0px 1px 1px grey',
     textAlign: 'center',
+    fontSize: '1.2rem',
+  },
+  input: {
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#86C4BA',
+      },
+    },
   },
 }))
 const Formulaire = () => {
@@ -49,6 +57,13 @@ const Formulaire = () => {
   const context = useContext(AuthContext)
   // errors
   const [errors, setErrors] = useState({})
+  // errors 2
+  const [errors2, setErrors2] = useState({})
+
+  // object non null
+  function isRealValue(obj) {
+    return obj && obj !== 'null' && obj !== 'undefined'
+  }
 
   const INITIAL_FORM_STATE = {
     firstName: '',
@@ -82,7 +97,7 @@ const Formulaire = () => {
   const [addUser] = useMutation(REGISTER_USER)
 
   return (
-    <Grid container sx={{ pt: 4 }} className={classes.background}>
+    <Grid container sx={{ pt: 0 }} className={classes.background}>
       <Grid item xs={12}>
         <Container maxWidth="sm">
           <div>
@@ -91,14 +106,15 @@ const Formulaire = () => {
               validationSchema={FORM_VALIDATION}
               // direction pour submit le form!
               onSubmit={async (values) => {
-                console.log(values)
+                // console.log(values)
                 //    fetch
                 const { data } = await addUser({
                   onError(err) {
-                    console.log(
-                      err.graphQLErrors[0].extensions.exception.errors
+                    setErrors(err.graphQLErrors[0].extensions.errors)
+                    setErrors2(
+                      err.graphQLErrors[0].extensions.exception.thrownValue
+                        .errors
                     )
-                    setErrors(err.graphQLErrors[0].extensions.exception.errors)
                   },
                   variables: {
                     firstname: values.firstName,
@@ -123,13 +139,14 @@ const Formulaire = () => {
               <Form className={classes.formulaire__form}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <div className={classes.sign}>Fill in your details</div>
+                    <p className={classes.sign}>Fill in your details</p>
                   </Grid>
                   <Grid item xs={6}>
                     <TextfieldWrapper
                       name="firstName"
                       label="First Name"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -137,6 +154,7 @@ const Formulaire = () => {
                       name="lastName"
                       label="Last Name"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -144,6 +162,7 @@ const Formulaire = () => {
                       name="username"
                       label="User Name"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
 
@@ -152,6 +171,7 @@ const Formulaire = () => {
                       name="email"
                       label="Email"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -160,6 +180,7 @@ const Formulaire = () => {
                       label="Password"
                       type="password"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -168,6 +189,7 @@ const Formulaire = () => {
                       label="Password Confirm"
                       type="password"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -175,6 +197,7 @@ const Formulaire = () => {
                       name="address"
                       label="Address"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -182,6 +205,7 @@ const Formulaire = () => {
                       name="city"
                       label="City"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -190,10 +214,13 @@ const Formulaire = () => {
                       options={countries}
                       label="Country"
                       fullWidth={true}
+                      className={classes.input}
                     />
                   </Grid>
-                  <Grid item xs={6}>
-                    {Object.keys(errors).length > 0 && (
+
+                  {/* errors1 */}
+                  <Grid item xs={12}>
+                    {isRealValue(errors) && (
                       <List
                         sx={{
                           width: '100%',
@@ -202,6 +229,45 @@ const Formulaire = () => {
                         aria-label="contacts"
                       >
                         {Object.values(errors).map((value) => (
+                          <ListItem disablePadding key={`${value}-padd`}>
+                            <ListItemButton
+                              key={`${value}-butt`}
+                              sx={{
+                                '&:hover': {
+                                  bgcolor: 'transparent',
+                                },
+                              }}
+                            >
+                              <ListItemIcon key={`${value}-icon`}>
+                                <ErrorIcon
+                                  key={`${value}-err`}
+                                  className={classes.error}
+                                />
+                              </ListItemIcon>
+
+                              <ListItemText
+                                key={value}
+                                primary={value}
+                                className={classes.error}
+                              />
+                            </ListItemButton>
+                          </ListItem>
+                        ))}
+                      </List>
+                    )}
+                  </Grid>
+
+                  {/* errors2 */}
+                  <Grid item xs={12}>
+                    {isRealValue(errors2) && (
+                      <List
+                        sx={{
+                          width: '100%',
+                          maxWidth: 360,
+                        }}
+                        aria-label="contacts"
+                      >
+                        {Object.values(errors2).map((value) => (
                           <ListItem disablePadding key={`${value}-padd`}>
                             <ListItemButton
                               key={`${value}-butt`}

@@ -20,6 +20,8 @@ import Submit from '../../components/FormUi/Submit/Submit'
 const useStyles = makeStyles((theme) => ({
   sign: {
     color: '#86C4BA',
+    textShadow: '0px 1px 1px grey',
+    fontSize: '1.2rem',
   },
   error: {
     color: '#da1212',
@@ -27,8 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
   login__background: {
     color: 'black',
-    backgroundColor: '#cedebd',
-    height: '100vh',
+    // height: '100vh',
     display: 'flex',
     alignItems: 'center',
   },
@@ -37,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '6px / 8px',
     padding: '2%',
     backgroundColor: '#fff',
+    boxShadow: '1px 1px 10px grey, -1px -1px 10px grey',
+  },
+  input: {
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#86C4BA',
+      },
+    },
   },
 }))
 const Login = () => {
@@ -97,17 +106,22 @@ const Login = () => {
                   justifyContent="center"
                 >
                   <Grid item xs={12}>
-                    <div className={classes.sign}>Sign In</div>
+                    <p className={classes.sign}>Sign in</p>
                   </Grid>
 
                   <Grid item xs={12}>
-                    <TextfieldWrapper name="email" label="Email" />
+                    <TextfieldWrapper
+                      name="email"
+                      label="Email"
+                      className={classes.input}
+                    />
                   </Grid>
                   <Grid item xs={12}>
                     <TextfieldWrapper
                       name="password"
                       label="Password"
                       type="password"
+                      className={classes.input}
                     />
                   </Grid>
 

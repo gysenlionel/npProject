@@ -31,6 +31,11 @@ const Formulaire = () => {
   // state apollo
   const [addUser] = useMutation(REGISTER_USER)
 
+  // check si objet non nul
+  function isRealValue(obj) {
+    return obj && obj !== 'null' && obj !== 'undefined'
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault()
     const { data } = await addUser({
@@ -160,7 +165,7 @@ const Formulaire = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                {Object.keys(errors).length > 0 && (
+                {isRealValue(errors) && (
                   <List
                     sx={{
                       width: '100%',

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, makeStyles } from '@material-ui/core'
-import { useFormikContext } from 'formik'
 
 const useStyles = makeStyles({
   button: {
@@ -12,19 +11,12 @@ const useStyles = makeStyles({
   },
 })
 
-const Submit = ({ children, ...otherProps }) => {
+const BlackButton = ({ children, ...otherProps }) => {
   const classes = useStyles()
-  // submit form du hook de fornik
-  const { submitForm } = useFormikContext()
-
-  const handleSubmit = () => {
-    submitForm()
-  }
 
   const configButton = {
     variant: 'contained',
-    fullWidth: true,
-    onClick: handleSubmit,
+    // fullWidth: true,
   }
   return (
     <Button className={classes.button} {...configButton}>
@@ -33,4 +25,4 @@ const Submit = ({ children, ...otherProps }) => {
   )
 }
 
-export default Submit
+export default BlackButton

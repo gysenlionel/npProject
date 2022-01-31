@@ -19,8 +19,8 @@ import Submit from '../../components/FormUi/Submit/Submit'
 
 const useStyles = makeStyles((theme) => ({
   sign: {
-    color: '#86C4BA',
-    textShadow: '0px 1px 1px grey',
+    color: '#DF4F4F',
+    fontWeight: 'bold',
     fontSize: '1.2rem',
   },
   error: {
@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
   login__background: {
     color: 'black',
-    // height: '100vh',
     display: 'flex',
     alignItems: 'center',
   },
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused fieldset': {
-        borderColor: '#86C4BA',
+        borderColor: 'black',
       },
     },
   },
@@ -72,7 +71,7 @@ const Login = () => {
   const [loginUser] = useMutation(LOGIN_USER)
 
   return (
-    <Grid container sx={{ pt: 4 }} className={classes.login__background}>
+    <Grid container sx={{ pt: 0 }} className={classes.login__background}>
       <Grid item xs={12}>
         <Container maxWidth="sm">
           <div>

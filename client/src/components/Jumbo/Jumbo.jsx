@@ -3,29 +3,32 @@ import React from 'react'
 
 import Modal from '../Modal/Modal'
 
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import { CardActionArea } from '@mui/material'
-
-import image from '../../assets/img/fiesta.jpg'
+import image from '../../assets/img/test6.jpg'
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    width: '100% !important',
+    backgroundImage: `url(${image})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: '100vh',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: theme.spacing(9),
+    marginTop: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(13),
+      marginTop: theme.spacing(10),
     },
   },
   jumbo: {
     height: 'auto',
     width: '30%',
     padding: '20px',
+    display: 'flex',
+    backgroundColor: 'rgba(0,0,0,0.800)',
+    flexDirection: 'column',
+    alignItems: 'center',
     [theme.breakpoints.down('md')]: {
       width: '30%',
     },
@@ -33,65 +36,31 @@ const useStyles = makeStyles((theme) => ({
       width: '70%',
     },
   },
-  image: {
-    width: '100%',
-    borderRadius: '30px / 20px',
-    [theme.breakpoints.down('md')]: {
-      width: '70%',
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
+  low: {
+    fontSize: '2rem',
   },
-  divImage: {
-    textAlign: 'center',
+  tickets: {
+    color: '#fff',
   },
-  experience: {
-    color: '#DF4F4F',
-    textShadow: '0px 1px 3px grey',
-  },
-  lowCost: {
-    fontSize: '1.8rem',
-    fontWeight: 'bold',
-    color: '#86C4BA',
-    textShadow: '0px 2px 3px black',
+  everyone: {
+    fontSize: '1.2rem',
+
+    color: '#fff',
   },
 }))
 const Jumbo = () => {
   const classes = useStyles()
 
   return (
-    <Container className={classes.container}>
-      <div className={classes.divImage}>
-        <img src={image} alt="" className={classes.image} />
-      </div>
+    <div className={classes.container}>
       <div className={classes.jumbo}>
+        <h2 className={classes.tickets}>
+          <span className={classes.low}>Low cost</span> tickets
+        </h2>
+        <p className={classes.everyone}>to share with everyone and enjoy!!!</p>
         <Modal />
-        <h4 className={classes.experience}>More experience</h4>
-        <p className={classes.lowCost}>
-          Low cost tickets for everyone and the whole family{' '}
-        </p>
       </div>
-      {/* <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            alt="green iguana"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card> */}
-    </Container>
+    </div>
   )
 }
 

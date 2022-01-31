@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { Grid, Container } from '@mui/material'
 import { gql, useMutation } from '@apollo/client'
 import { makeStyles } from '@material-ui/core'
+import { NavLink } from 'react-router-dom'
 
 import { AuthContext } from '../../context/auth'
 
@@ -13,11 +14,13 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ErrorIcon from '@mui/icons-material/Error'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 import TextfieldWrapper from '../../components/FormUi/Textfield/Textfield'
 import Submit from '../../components/FormUi/Submit/Submit'
 import SelectWrapper from '../../components/FormUi/SelectWrapper/SelectWrapper'
 import countries from '../../data/countries.json'
+import image from '../../assets/img/test6.jpg'
 
 const useStyles = makeStyles((theme) => ({
   error: {
@@ -26,28 +29,46 @@ const useStyles = makeStyles((theme) => ({
 
   background: {
     color: 'black',
-    // display: 'flex',
-    // alignItems: 'center',
+    backgroundImage: `url(${image})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+    marginTop: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(10),
+    },
   },
-
+  formContainer: {
+    marginTop: theme.spacing(4),
+  },
   formulaire__form: {
     borderRadius: '6px / 8px',
     padding: '2%',
     marginBottom: '6%',
     backgroundColor: '#fff',
-    boxShadow: '1px 1px 10px grey, -1px -1px 10px grey',
+    boxShadow: '1px 1px 5px grey, -1px -1px 5px grey',
   },
   sign: {
-    color: '#86C4BA',
-    textShadow: '0px 1px 1px grey',
-    textAlign: 'center',
+    color: '#DF4F4F',
+    margin: 'auto',
     fontSize: '1.2rem',
   },
   input: {
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused fieldset': {
-        borderColor: '#86C4BA',
+        borderColor: 'black',
       },
+    },
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  arrow: {
+    color: '#595959',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#000000',
     },
   },
 }))
@@ -56,9 +77,9 @@ const Formulaire = () => {
   // context data user
   const context = useContext(AuthContext)
   // errors
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState(null)
   // errors 2
-  const [errors2, setErrors2] = useState({})
+  const [errors2, setErrors2] = useState(null)
 
   // object non null
   function isRealValue(obj) {
@@ -99,7 +120,7 @@ const Formulaire = () => {
   return (
     <Grid container sx={{ pt: 0 }} className={classes.background}>
       <Grid item xs={12}>
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" className={classes.formContainer}>
           <div>
             <Formik
               initialValues={{ ...INITIAL_FORM_STATE }}
@@ -139,7 +160,12 @@ const Formulaire = () => {
               <Form className={classes.formulaire__form}>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <p className={classes.sign}>Fill in your details</p>
+                    <div className={classes.title}>
+                      <NavLink to="/">
+                        <ArrowBackIcon className={classes.arrow} />
+                      </NavLink>
+                      <h1 className={classes.sign}>Fill in your details</h1>
+                    </div>
                   </Grid>
                   <Grid item xs={6}>
                     <TextfieldWrapper

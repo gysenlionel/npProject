@@ -5,6 +5,7 @@ import { Container, Grid, makeStyles } from '@material-ui/core'
 import { AuthContext } from '../../context/auth'
 
 import Jumbo from '../../components/Jumbo/Jumbo'
+import Main from '../../components/Main/Main'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,6 +24,7 @@ const Home = () => {
   return (
     <Grid container className={classes.container}>
       <Jumbo />
+      <Main />
     </Grid>
   )
 }

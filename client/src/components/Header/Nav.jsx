@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
@@ -11,6 +13,8 @@ import Avatar from '@mui/material/Avatar'
 import { makeStyles } from '@material-ui/core'
 import logo from '../../assets/logo/logo_t.png'
 
+import Login from '../../pages/Login/Login'
+
 import { AuthContext } from '../../context/auth'
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#86C4BA',
+    backgroundColor: '#000000',
   },
   typo: {
     fontFamily: 'Abel',
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   navlinksm: {
     color: '#757575',
     textDecoration: 'none',
-    '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    '&:hover': { color: '#DF4F4F', fontWeight: 'bold' },
   },
   fullLogo: {
     textAlign: 'center',
@@ -55,6 +59,15 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  fullLogoDrawer: {
+    textAlign: 'center',
+    marginTop: theme.spacing(4),
+  },
+  typoDrawer: {
+    fontFamily: 'Abel',
+    color: '#000000',
+    fontWeight: 'bold',
+  },
   icons: {
     display: 'flex',
     alignItems: 'center',
@@ -67,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     marginRight: theme.spacing(8),
-    '&:hover': { color: '#1572A1' },
+    '&:hover': { color: '#DF4F4F' },
   },
   linkDrawer: {
     [theme.breakpoints.up('sm')]: {
@@ -78,10 +91,10 @@ const useStyles = makeStyles((theme) => ({
   disconnect: {
     color: '#757575',
     cursor: 'pointer',
-    '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    '&:hover': { color: '#DF4F4F', fontWeight: 'bold' },
     [theme.breakpoints.up('sm')]: {
       margin: 'auto',
-      '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+      '&:hover': { color: '#DF4F4F', fontWeight: 'bold' },
     },
   },
   linksLg: {
@@ -109,11 +122,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   login: {
+    color: '#757575',
     cursor: 'pointer',
-    '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+    '&:hover': { color: '#DF4F4F', fontWeight: 'bold' },
     [theme.breakpoints.up('sm')]: {
       margin: 'auto',
-      '&:hover': { color: '#1572A1', fontWeight: 'bold' },
+      '&:hover': { color: '#DF4F4F', fontWeight: 'bold' },
     },
   },
   borderB: {
@@ -133,6 +147,21 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     borderBottom: '1px solid #757575',
   },
+  usernamename: {
+    color: '#DF4F4F',
+    fontWeight: 'bold',
+  },
+  modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '50%',
+    bgcolor: 'background.paper',
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+    },
+  },
 }))
 
 const Nav = () => {
@@ -141,6 +170,10 @@ const Nav = () => {
   const classes = useStyles()
 
   const [open, setOpen] = React.useState(false)
+
+  const [openModal, setOpenModal] = React.useState(false)
+  const handleOpen = () => setOpenModal(true)
+  const handleClose = () => setOpenModal(false)
 
   return (
     <AppBar className={classes.appbar}>
@@ -171,7 +204,10 @@ const Nav = () => {
         </div>
         <div className={classes.icons}>
           {user ? (
-            <div className={classes.username}>Hello, {user.username}</div>
+            <div className={classes.username}>
+              Hello,{' '}
+              <span className={classes.usernamename}>{user.username}</span>
+            </div>
           ) : null}
           <NavLink to="profil" className={classes.navlink}>
             <Avatar
@@ -248,12 +284,32 @@ const Nav = () => {
               </ListItem>
             </span>
           ) : (
-            <span className={classes.borderB}>
-              <ListItem>
-                <div className={classes.login}>Login</div>
-              </ListItem>
-            </span>
+            <>
+              <Modal
+                open={openModal}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box className={classes.modal}>
+                  <Login />
+                </Box>
+              </Modal>
+
+              <span className={classes.borderB}>
+                <ListItem>
+                  <div onClick={handleOpen} className={classes.login}>
+                    Login
+                  </div>
+                </ListItem>
+              </span>
+            </>
           )}
+          <div className={classes.fullLogoDrawer}>
+            <img src={logo} alt="" className={classes.logoLg} />
+            <img src={logo} alt="" className={classes.logoSm} />
+            <div className={classes.typoDrawer}>My Event</div>
+          </div>
         </Drawer>
       </Toolbar>
     </AppBar>

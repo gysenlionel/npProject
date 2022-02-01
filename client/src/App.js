@@ -17,6 +17,7 @@ import Events from "./pages/Events/Events";
 import News from "./pages/News/News"
 import Shopping from "./pages/Shopping/Shopping"
 import Profil from "./pages/Profil/Profil"
+import CardDetails from "./components/CardDetails/CardDetails";
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
           <Route path='shopping' element={<Shopping />} />
           <Route path='events' element={<Events />} />
           <Route path='profil' element={<Profil />} />
+
+          <Route path='events/:id' element={<CardDetails />} />
+          <Route path='/:id' element={<CardDetails />} />
 
 
           <Route path="*" element={<NotFound />} />

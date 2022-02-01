@@ -58,7 +58,7 @@ const SearchBar = ({ setSearch, setPageNumber }) => {
           placeholder="Search artists"
           className={classes.input}
           onChange={(e) => {
-            // setPageNumber(0)
+            setPageNumber(0)
             setSearch(e.target.value)
           }}
         />

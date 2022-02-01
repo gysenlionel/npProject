@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  test: {
+    textAlign: '-webkit-center',
+  },
 }))
 const Events = () => {
   const classes = useStyles()
@@ -34,8 +37,8 @@ const Events = () => {
   let [loading, setLoading] = useState(true)
   // data
   let [pageNumber, setPageNumber] = useState(0)
-  let [fetchedData, updateFetchedData] = useState([])
   let [search, setSearch] = useState('')
+  let [fetchedData, updateFetchedData] = useState([])
   // destructuration data
   let { page, _embedded, _links } = fetchedData
 
@@ -51,7 +54,7 @@ const Events = () => {
     })()
   }, [api])
 
-  console.log(page)
+  // console.log(_embedded )
   return (
     <div className={classes.container}>
       <Grid container className={classes.container}>
@@ -75,13 +78,22 @@ const Events = () => {
                 ) : (
                   _embedded &&
                   _embedded.events.map((e, index) => (
-                    <Grid item lg={3} md={4} xs={6} key={index}>
+                    <Grid
+                      item
+                      lg={3}
+                      md={4}
+                      sm={6}
+                      xs={12}
+                      key={index}
+                      className={classes.test}
+                    >
                       <CardComp
                         name={e.name}
                         img={e.images[8].url}
                         date={e.dates.start.localDate}
                         priceMin={e.priceRanges[0].min}
                         venue={e._embedded.venues[0].name}
+                        id={e.id}
                       />
                     </Grid>
                   ))

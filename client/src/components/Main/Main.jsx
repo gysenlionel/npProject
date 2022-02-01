@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  test: {
+    textAlign: '-webkit-center',
+  },
 }))
 const Main = () => {
   const classes = useStyles()
@@ -37,7 +40,7 @@ const Main = () => {
   let [loading, setLoading] = useState(true)
 
   let [fetchedData, updateFetchedData] = useState([])
-
+  let { page, _embedded, _links } = fetchedData
   //   fetch
   let api = `
   https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.REACT_APP_TICKETS_KEY}&locale=*&countryCode=BE&segmentId=KZFzniwnSyZfZ7v7nJ`
@@ -45,12 +48,11 @@ const Main = () => {
     ;(async function () {
       let results = await fetch(api)
       let data = await results.json()
-      updateFetchedData(data._embedded.events)
+      updateFetchedData(data)
       setLoading(false)
     })()
   }, [api])
 
-  console.log(fetchedData)
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
@@ -70,15 +72,24 @@ const Main = () => {
                   <Spinner />
                 </div>
               ) : (
-                fetchedData &&
-                fetchedData.map((e, index) => (
-                  <Grid item lg={3} md={4} xs={6} key={index}>
+                _embedded &&
+                _embedded.events.map((e, index) => (
+                  <Grid
+                    item
+                    lg={3}
+                    md={4}
+                    sm={6}
+                    xs={12}
+                    key={index}
+                    className={classes.test}
+                  >
                     <CardComp
                       name={e.name}
                       img={e.images[8].url}
                       date={e.dates.start.localDate}
                       priceMin={e.priceRanges[0].min}
                       venue={e._embedded.venues[0].name}
+                      id={e.id}
                     />
                   </Grid>
                 ))

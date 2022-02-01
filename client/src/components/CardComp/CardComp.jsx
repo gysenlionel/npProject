@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     color: '#6E6E6E',
+    textAlign: 'start',
   },
   more: {
     color: '#DF4F4F',
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardActions: {
     position: 'absolute',
-    top: '370px',
+    top: '240px',
     left: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       top: '240px',
@@ -40,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   allCard: {
     maxWidth: 345,
-    height: 580,
+    height: 450,
     // [theme.breakpoints.down('md')]: {
     //   height: 440,
     // },
@@ -48,9 +50,12 @@ const useStyles = makeStyles((theme) => ({
       height: 450,
     },
   },
+  link: {
+    textDecoration: 'none',
+  },
 }))
 
-export default function ImgMediaCard({ name, img, date, priceMin, venue }) {
+export default function ImgMediaCard({ name, img, date, priceMin, venue, id }) {
   const classes = useStyles()
   return (
     <div className={classes.card}>
@@ -71,10 +76,12 @@ export default function ImgMediaCard({ name, img, date, priceMin, venue }) {
             </div>
           </CardContent>
           <div className={classes.cardActions}>
-            <div className={classes.more}>
-              <p>Learn more </p>
-              <KeyboardArrowRightIcon />
-            </div>
+            <Link to={id} className={classes.link}>
+              <div className={classes.more}>
+                <p>Learn more </p>
+                <KeyboardArrowRightIcon />
+              </div>
+            </Link>
           </div>
         </div>
       </Card>

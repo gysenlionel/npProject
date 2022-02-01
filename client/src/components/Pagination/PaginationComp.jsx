@@ -9,10 +9,9 @@ const useStyles = makeStyles((theme) => ({
   ul: {
     '& .MuiPaginationItem-root': {
       color: '#000000',
-      backgroundColor: '#fff',
     },
     '& .Mui-selected': {
-      // backgroundColor: 'black',
+      backgroundColor: 'black',
       color: '#DF4F4F',
       fontWeight: 'bold',
     },

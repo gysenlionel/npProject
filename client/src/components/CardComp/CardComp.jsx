@@ -11,7 +11,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    boxShadow: '-1px 1px 1px rgba(0,0,0, 0.3), 1px -1px 1px rgba(0,0,0, 0.3)',
+    boxShadow: '0px 1px 5px rgba(0,0,0, 0.4)',
     borderRadius: '6px',
     maxWidth: 345,
   },

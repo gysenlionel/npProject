@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme) => ({
       '&.Mui-focused fieldset': {
         borderColor: 'black',
       },
+      '&.Mui-focusVisible': {
+        color: 'black',
+      },
     },
   },
   title: {

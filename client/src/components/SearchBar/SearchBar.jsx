@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core'
 import SearchIcon from '@mui/icons-material/Search'
 import { InputBase } from '@mui/material'
 import CancelIcon from '@mui/icons-material/Cancel'
-import { alpha } from '@mui/material/styles'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -14,14 +13,13 @@ const useStyles = makeStyles((theme) => ({
   search: {
     display: (props) => (props.open ? 'flex' : 'none'),
     alignItems: 'center',
-    backgroundColor: alpha(theme.palette.common.black, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.black, 0.25),
-    },
+    border: '1px solid #000000',
     borderRadius: theme.shape.borderRadius,
     width: '70%',
+
     [theme.breakpoints.up('sm')]: {
       width: '24%',
+      border: ' 1px solid #000000',
       display: (props) => (props.open ? 'flex' : 'flex'),
     },
   },
@@ -43,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
       display: (props) => (props.open ? 'none ' : 'none'),
     },
   },
+  icon: {
+    color: '#DF4F4F',
+  },
 }))
 
 const SearchBar = ({ setSearch, setPageNumber }) => {
@@ -53,7 +54,7 @@ const SearchBar = ({ setSearch, setPageNumber }) => {
   return (
     <div className={classes.container}>
       <div className={classes.search}>
-        <SearchIcon />
+        <SearchIcon className={classes.icon} />
         <InputBase
           placeholder="Search artists"
           className={classes.input}
@@ -67,7 +68,7 @@ const SearchBar = ({ setSearch, setPageNumber }) => {
         </div>
       </div>
       <div className={classes.searchButton}>
-        <SearchIcon onClick={() => setOpen(true)} />
+        <SearchIcon onClick={() => setOpen(true)} className={classes.icon} />
       </div>
     </div>
   )

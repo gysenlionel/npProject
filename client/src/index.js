@@ -11,6 +11,8 @@ import './index.css';
 import App from './App'
 import { client } from './adapters/apolloProvider'
 
+
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -29,9 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     textAlign: 'center',
+    color: '#DF4F4F',
   },
   info: {
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
   badge: {
     float: 'left',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.8rem',
     borderRadius: '4px',
     backgroundColor: '#000000',
-    width: '50px',
+    width: '70px',
     color: '#fff',
     padding: '1px',
   },
@@ -48,10 +49,27 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  additionnalTitle: {
+    textAlign: 'center',
+    color: '#DF4F4F',
+  },
+  links: {
+    color: '#000000',
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#DF4F4F',
+    },
+  },
+  ShoppingCart: {
+    marginTop: theme.spacing(1),
+  },
 }))
+
 const CardDetails = () => {
   const classes = useStyles()
   let [loading, setLoading] = useState(true)
+  let [facebook, setFacebook] = useState('empty')
+  let [youtube, setYoutube] = useState('empty')
 
   let { id } = useParams()
 
@@ -66,6 +84,16 @@ const CardDetails = () => {
       let data = await results.json()
       updateFetchedData(data._embedded.events)
       setLoading(false)
+      // évite problème undefined
+      setFacebook(
+        data._embedded.events[0]._embedded.attractions[0].externalLinks
+          .facebook[0].url
+      )
+
+      setYoutube(
+        data._embedded.events[0]._embedded.attractions[0].externalLinks
+          .youtube[0].url
+      )
     })()
   }, [api])
 
@@ -133,8 +161,67 @@ const CardDetails = () => {
                       </div>
                     </div>
                   </Grid>
-                  <Grid item md={6} sm={6} xs={12}>
+                  <div className={classes.ShoppingCart}>
                     <ShoppingCart fetchedData={fetchedData} />
+                  </div>
+                  <Grid item xs={12}>
+                    <div>
+                      <h3 className={classes.additionnalTitle}>
+                        Additional info
+                      </h3>
+                      <Grid container>
+                        <Grid item xs={12}>
+                          <Container
+                            maxWidth="lg"
+                            className={classes.secondContainer}
+                          >
+                            <Grid container spacing={2}>
+                              <Grid item md={4} sm={6} xs={12}>
+                                <p>
+                                  <span className={classes.badge}>Genre</span>
+                                  &nbsp;{' '}
+                                  {
+                                    fetchedData[0]?.classifications[0].genre
+                                      .name
+                                  }
+                                </p>
+                              </Grid>
+                              <Grid item md={4} sm={6} xs={12}>
+                                <p>
+                                  <span className={classes.badge}>
+                                    Facebook
+                                  </span>
+                                  &nbsp;
+                                  {facebook !== 'empty' ? (
+                                    <a
+                                      href={facebook}
+                                      className={classes.links}
+                                    >
+                                      Website
+                                    </a>
+                                  ) : (
+                                    'empty'
+                                  )}
+                                </p>
+                              </Grid>
+                              <Grid item md={4} sm={6} xs={12}>
+                                <p>
+                                  <span className={classes.badge}>Youtube</span>
+                                  &nbsp;
+                                  {youtube !== 'empty' ? (
+                                    <a href={youtube} className={classes.links}>
+                                      Website
+                                    </a>
+                                  ) : (
+                                    'empty'
+                                  )}
+                                </p>
+                              </Grid>
+                            </Grid>
+                          </Container>
+                        </Grid>
+                      </Grid>
+                    </div>
                   </Grid>
                 </>
               )}

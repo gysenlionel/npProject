@@ -11,12 +11,13 @@ const useStyles = makeStyles({
   },
 })
 
-const BlackButton = ({ children, ...otherProps }) => {
+const BlackButton = ({ children, onClick, ...otherProps }) => {
   const classes = useStyles()
 
   const configButton = {
     variant: 'contained',
     // fullWidth: true,
+    onClick: onClick,
   }
   return (
     <Button className={classes.button} {...configButton}>

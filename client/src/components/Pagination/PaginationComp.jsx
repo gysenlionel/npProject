@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#000000',
     },
     '& .Mui-selected': {
-      backgroundColor: 'black',
+      backgroundColor: 'black !important',
       color: '#DF4F4F',
       fontWeight: 'bold',
     },

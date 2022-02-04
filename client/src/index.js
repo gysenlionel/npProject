@@ -14,8 +14,7 @@ import './index.css';
 import App from './App'
 import { client } from './adapters/apolloProvider'
 
-console.log(store)
-console.log(store.getState())
+
 
 ReactDOM.render(
   <React.StrictMode>

@@ -16,6 +16,7 @@ import { client } from './adapters/apolloProvider'
 
 
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

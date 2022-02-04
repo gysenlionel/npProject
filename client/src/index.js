@@ -4,6 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client'
 
+import { Provider } from 'react-redux'
+import store from './redux/store'
+
 import './fonts/Telex/Telex-Regular.ttf'
 import './fonts/abel/Abel-Regular.ttf'
 import './index.css';
@@ -11,13 +14,16 @@ import './index.css';
 import App from './App'
 import { client } from './adapters/apolloProvider'
 
-
+console.log(store)
+console.log(store.getState())
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>,

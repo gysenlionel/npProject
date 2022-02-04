@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
 const ShoppingCart = ({ fetchedData, history }) => {
   const classes = useStyles()
 
+  // items pour le total
+  const [items, setItems] = useState([])
+
   const [qtyMin, setQtyMin] = useState(0)
   const [qtyMax, setQtyMax] = useState(0)
 
@@ -101,7 +104,7 @@ const ShoppingCart = ({ fetchedData, history }) => {
       </div>
       <div className={classes.totalContainer}>
         <h4>Total</h4>
-        <div>...€</div>
+        {items.length === 0 && <div>empty</div>}
         <div className={classes.button}>
           <BlackButton children="add to" />
         </div>

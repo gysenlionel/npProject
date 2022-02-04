@@ -57,7 +57,7 @@ const Events = () => {
     })()
   }, [api])
 
-  // console.log(_embedded )
+  console.log(_embedded)
   return (
     <div className={classes.container}>
       <Grid container className={classes.container}>

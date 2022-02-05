@@ -13,6 +13,8 @@ import Avatar from '@mui/material/Avatar'
 import { makeStyles } from '@material-ui/core'
 import logo from '../../assets/logo/logo_t.png'
 
+import BadgeClassic from '../Badge/BadgeClassic'
+
 import Login from '../../pages/Login/Login'
 
 import { AuthContext } from '../../context/auth'
@@ -79,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   link: {
+    backgroundColor: '#000000',
     marginRight: theme.spacing(8),
     '&:hover': { color: '#DF4F4F' },
   },
@@ -98,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   linksLg: {
+    position: 'relative',
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
@@ -162,6 +166,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100vw',
     },
   },
+  badge: {},
 }))
 
 const Nav = () => {
@@ -198,7 +203,9 @@ const Nav = () => {
           </NavLink>
           <NavLink to="shopping" className={classes.navlink}>
             <div className={classes.linksLg}>
-              <div className={classes.link}>Shopping List</div>
+              <BadgeClassic className={classes.badge}>
+                <div className={classes.link}>Shopping List</div>
+              </BadgeClassic>
             </div>
           </NavLink>
         </div>
@@ -228,7 +235,7 @@ const Nav = () => {
         </div>
         <Drawer
           open={open}
-          onOpen={() => setOpen(true)}
+          // onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
           anchor="right"
           classes={{

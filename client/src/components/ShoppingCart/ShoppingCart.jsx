@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+// redux
+import { useDispatch } from 'react-redux'
+import { addCart } from '../../redux/action'
 
 import { makeStyles } from '@material-ui/core'
 
@@ -62,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }))
-const ShoppingCart = ({ fetchedData, history }) => {
+const ShoppingCart = ({ fetchedData }) => {
   const classes = useStyles()
 
   // items pour le total
@@ -70,6 +73,11 @@ const ShoppingCart = ({ fetchedData, history }) => {
 
   const [qtyMin, setQtyMin] = useState(0)
   const [qtyMax, setQtyMax] = useState(0)
+
+  const dispatch = useDispatch()
+  const addProduct = (product) => {
+    dispatch(addCart(product))
+  }
 
   let price = []
 
@@ -106,7 +114,10 @@ const ShoppingCart = ({ fetchedData, history }) => {
         <h4>Total</h4>
         {items.length === 0 && <div>empty</div>}
         <div className={classes.button}>
-          <BlackButton children="add to" />
+          <BlackButton
+            children="add to"
+            onClick={() => addProduct(fetchedData[0])}
+          />
         </div>
       </div>
       <div>

@@ -17,14 +17,29 @@ const useStyles = makeStyles((theme) => ({
   name: {
     padding: 0,
     margin: 0,
+    color: '#DF4F4F',
+  },
+  info: {
+    fontSize: ' 0.8rem',
+  },
+  total: {
+    fontWeight: 'bold',
   },
 }))
 
 const MiniCard = ({ data, qtyMin, qtyMax }) => {
   const classes = useStyles()
 
-  // const state = useSelector((state) => state.handleCart)
-  // const dispatch = useDispatch()
+  const totalPrice = (qtyMin, qtyMax, priceMin, PriceMax) => {
+    let qtymin = parseFloat(qtyMin)
+    let qtymax = parseFloat(qtyMax)
+    let pricemin = parseFloat(priceMin)
+    let pricemax = parseFloat(PriceMax)
+
+    let result = qtymin * pricemin + qtymax * pricemax
+
+    return result
+  }
 
   return (
     <div className={classes.container}>
@@ -42,14 +57,36 @@ const MiniCard = ({ data, qtyMin, qtyMax }) => {
               <Grid item lg={4} md={4} sm={4} xs={12}>
                 <div className={classes.infoContainer}>
                   <h4 className={classes.name}>{data.name}</h4>
-                  <p>{`${data.dates.start.localDate} à ${data.dates.start.localTime}`}</p>
-                  <p>{data._embedded.venues[0].name}</p>
+                  <p
+                    className={classes.info}
+                  >{`${data.dates.start.localDate} à ${data.dates.start.localTime}`}</p>
+                  <p className={classes.info}>
+                    {data._embedded.venues[0].name}
+                  </p>
                 </div>
               </Grid>
 
               <Grid item lg={4} md={4} sm={4} xs={12}>
-                {qtyMin}
-                {qtyMax}
+                <p className={classes.info}>
+                  {qtyMin !== '0'
+                    ? `${qtyMin} x ${data.priceRanges[0].min}€ `
+                    : null}
+                </p>
+                <p className={classes.info}>
+                  {qtyMax !== '0'
+                    ? `${qtyMax} x ${data.priceRanges[0].max}€ `
+                    : null}
+                </p>
+
+                <h4 className={classes.total}>
+                  {totalPrice(
+                    qtyMin,
+                    qtyMax,
+                    data.priceRanges[0].min,
+                    data.priceRanges[0].max
+                  )}{' '}
+                  €
+                </h4>
               </Grid>
             </Grid>
           </Container>

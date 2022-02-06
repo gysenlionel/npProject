@@ -6,11 +6,11 @@ const handleCart = (state = cart, action) => {
   switch (action.type) {
     case 'ADDITEM':
       // check product already exist
-      const exist = state.find((x) => x.id === product.id)
+      const exist = state.find((x) => x.product.id === product.product.id)
       if (exist) {
         // incremente la qty de  1
         return state.map((x) =>
-          x.id === product.id ? { ...x, qty: x.qty + 1 } : x
+          x.product.id === product.product.id ? { ...x, qty: x.qty + 1 } : x
         )
       } else {
         const product = action.payload
@@ -24,6 +24,7 @@ const handleCart = (state = cart, action) => {
       }
       break
 
+    // !! corrigé fonction delItem
     case 'DELITEM':
       const exist1 = state.find((x) => x.id === product.id)
       if (exist1.qty === 1) {

@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
       '&.Mui-focusVisible': {
         color: 'black',
       },
+      '&.Mui-focused': {
+        color: '#000000',
+      },
     },
   },
   title: {

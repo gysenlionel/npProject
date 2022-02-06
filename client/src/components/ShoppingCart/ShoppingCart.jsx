@@ -71,12 +71,12 @@ const ShoppingCart = ({ fetchedData }) => {
   // items pour le total
   const [items, setItems] = useState([])
 
-  const [qtyMin, setQtyMin] = useState(0)
-  const [qtyMax, setQtyMax] = useState(0)
+  const [qtyMin, setQtyMin] = useState('0')
+  const [qtyMax, setQtyMax] = useState('0')
 
   const dispatch = useDispatch()
-  const addProduct = (product) => {
-    dispatch(addCart(product))
+  const addProduct = (product, qtyMin, qtyMax) => {
+    dispatch(addCart(product, qtyMin, qtyMax))
   }
 
   let price = []
@@ -97,6 +97,7 @@ const ShoppingCart = ({ fetchedData }) => {
             InputProps={{ inputProps: { min: 0, max: 10 } }}
             placeholder="Tickets"
             className={classes.input}
+            value={qtyMin}
             onChange={(e) => setQtyMin(e.target.value)}
           />
         </div>
@@ -106,6 +107,7 @@ const ShoppingCart = ({ fetchedData }) => {
             InputProps={{ inputProps: { min: 0, max: 10 } }}
             placeholder="Tickets"
             className={classes.input}
+            value={qtyMax}
             onChange={(e) => setQtyMax(e.target.value)}
           />
         </div>
@@ -116,7 +118,7 @@ const ShoppingCart = ({ fetchedData }) => {
         <div className={classes.button}>
           <BlackButton
             children="add to"
-            onClick={() => addProduct(fetchedData[0])}
+            onClick={() => addProduct(fetchedData[0], qtyMin, qtyMax)}
           />
         </div>
       </div>

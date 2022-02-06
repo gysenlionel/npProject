@@ -1,8 +1,12 @@
 //  add item to cart
-export const addCart = (product) => {
+export const addCart = (product, qtyMin, qtyMax) => {
   return {
     type: 'ADDITEM',
-    payload: product,
+    payload: {
+      product,
+      qtyMin,
+      qtyMax,
+    },
   }
 }
 

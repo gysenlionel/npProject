@@ -63,6 +63,29 @@ const useStyles = makeStyles((theme) => ({
   ShoppingCart: {
     marginTop: theme.spacing(1),
   },
+  badgeDisabled: {
+    float: 'left',
+    textAlign: 'center',
+    fontSize: '0.8rem',
+    borderRadius: '4px',
+    backgroundColor: 'grey',
+    width: '70px',
+    color: '#fff',
+    padding: '1px',
+  },
+  badgeLink: {
+    float: 'left',
+    textAlign: 'center',
+    fontSize: '0.8rem',
+    borderRadius: '4px',
+    backgroundColor: '#000000',
+    width: '70px',
+    color: '#fff',
+    padding: '1px',
+    '&:hover': {
+      backgroundColor: '#DF4F4F',
+    },
+  },
 }))
 
 const CardDetails = () => {
@@ -171,10 +194,7 @@ const CardDetails = () => {
                       </h3>
                       <Grid container>
                         <Grid item xs={12}>
-                          <Container
-                            maxWidth="lg"
-                            className={classes.secondContainer}
-                          >
+                          <Container maxWidth="lg">
                             <Grid container spacing={2}>
                               <Grid item md={4} sm={6} xs={12}>
                                 <p>
@@ -186,34 +206,36 @@ const CardDetails = () => {
                                   }
                                 </p>
                               </Grid>
-                              <Grid item md={4} sm={6} xs={12}>
+                              <Grid item md={4} sm={6} xs={6}>
                                 <p>
-                                  <span className={classes.badge}>
-                                    Facebook
-                                  </span>
-                                  &nbsp;
                                   {facebook !== 'empty' ? (
                                     <a
                                       href={facebook}
                                       className={classes.links}
                                     >
-                                      Website
+                                      <span className={classes.badgeLink}>
+                                        Facebook
+                                      </span>
                                     </a>
                                   ) : (
-                                    'empty'
+                                    <span className={classes.badgeDisabled}>
+                                      Facebook
+                                    </span>
                                   )}
                                 </p>
                               </Grid>
-                              <Grid item md={4} sm={6} xs={12}>
+                              <Grid item md={4} sm={6} xs={6}>
                                 <p>
-                                  <span className={classes.badge}>Youtube</span>
-                                  &nbsp;
                                   {youtube !== 'empty' ? (
                                     <a href={youtube} className={classes.links}>
-                                      Website
+                                      <span className={classes.badgeLink}>
+                                        Youtube
+                                      </span>
                                     </a>
                                   ) : (
-                                    'empty'
+                                    <span className={classes.badgeDisabled}>
+                                      Youtube
+                                    </span>
                                   )}
                                 </p>
                               </Grid>

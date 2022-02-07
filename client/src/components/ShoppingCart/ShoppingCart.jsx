@@ -8,8 +8,14 @@ import { makeStyles } from '@material-ui/core'
 import TextfieldNoFormik from '../FormUi/Textfield/TextFieldNoformik'
 import BlackButton from '../Button/BlackButton'
 
+import { totalPrice } from '../../utils/totalPrice'
+
 const useStyles = makeStyles((theme) => ({
-  shoppingCart__container: {},
+  shoppingCart__container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
   inputs: {
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused fieldset': {
@@ -40,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
   shoppingCart: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     flexWrap: 'wrap',
     border: '1px #DF4F4F solid',
     padding: theme.spacing(1),
@@ -60,9 +66,20 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     marginTop: theme.spacing(2),
     borderRadius: '4px',
+    minWidth: '45%',
   },
   button: {
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+  total: {
+    content: '',
+    display: 'block',
+    width: '25%',
+    height: '1px',
+    borderTop: '1px solid #000000',
+    margin: '0px auto',
+    padding: '10px',
   },
 }))
 const ShoppingCart = ({ fetchedData }) => {
@@ -101,20 +118,52 @@ const ShoppingCart = ({ fetchedData }) => {
             onChange={(e) => setQtyMin(e.target.value)}
           />
         </div>
-        <div className={classes.inputs}>
-          <p className={classes.prices}>{price[1]}€</p>
-          <TextfieldNoFormik
-            InputProps={{ inputProps: { min: 0, max: 10 } }}
-            placeholder="Tickets"
-            className={classes.input}
-            value={qtyMax}
-            onChange={(e) => setQtyMax(e.target.value)}
-          />
-        </div>
+        {fetchedData[0].priceRanges[0].min !==
+        fetchedData[0].priceRanges[0].max ? (
+          <div className={classes.inputs}>
+            <p className={classes.prices}>{price[1]}€</p>
+            <TextfieldNoFormik
+              InputProps={{ inputProps: { min: 0, max: 10 } }}
+              placeholder="Tickets"
+              className={classes.input}
+              value={qtyMax}
+              onChange={(e) => setQtyMax(e.target.value)}
+            />
+          </div>
+        ) : null}
       </div>
       <div className={classes.totalContainer}>
         <h4>Total</h4>
-        {items.length === 0 && <div>empty</div>}
+        <p>
+          {qtyMin !== '0'
+            ? `${qtyMin} x ${
+                fetchedData[0].priceRanges[0].min &&
+                fetchedData[0].priceRanges[0].min
+              }€ `
+            : null}
+        </p>
+        <p>
+          {qtyMax !== '0'
+            ? `${qtyMax} x ${
+                fetchedData[0].priceRanges[0].max &&
+                fetchedData[0].priceRanges[0].max
+              }€ `
+            : null}
+        </p>
+        <br />
+
+        {qtyMax !== '0' || qtyMin !== '0' ? (
+          <h4 className={classes.total}>
+            {totalPrice(
+              qtyMin,
+              qtyMax,
+              fetchedData[0].priceRanges[0].min,
+              fetchedData[0].priceRanges[0].max
+            )}
+            €
+          </h4>
+        ) : null}
+
         <div className={classes.button}>
           <BlackButton
             children="add to"
@@ -122,14 +171,15 @@ const ShoppingCart = ({ fetchedData }) => {
           />
         </div>
       </div>
+
       <div>
         <div className={classes.disclamerContainer}>
           <p>
             Complaints (without forgetting to indicate the reason(s) invoked)
             must be addressed as soon as possible but no later than 14 days
             after delivery in writing to My Event, which will follow up the
-            complaint. In the event of an order error on the part of the Buyer,
-            he/she may benefit from a right of exchange within 14 days of
+            complaint. <br /> In the event of an order error on the part of the
+            Buyer, he/she may benefit from a right of exchange within 14 days of
             receipt.
           </p>
         </div>

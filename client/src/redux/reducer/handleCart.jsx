@@ -26,12 +26,12 @@ const handleCart = (state = cart, action) => {
 
     // !! corrigé fonction delItem
     case 'DELITEM':
-      const exist1 = state.find((x) => x.id === product.id)
+      const exist1 = state.find((x) => x.product.id === product.product.id)
       if (exist1.qty === 1) {
-        return state.filter((x) => x.id !== exist1.id)
+        return state.filter((x) => x.product.id !== exist1.product.id)
       } else {
         return state.map((x) =>
-          x.id === product.id ? { ...x, qty: x.qty - 1 } : x
+          x.product.id === product.product.id ? { ...x, qty: x.qty - 1 } : x
         )
       }
       break

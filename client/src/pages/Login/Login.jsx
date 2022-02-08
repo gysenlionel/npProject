@@ -83,7 +83,8 @@ const Login = () => {
                 //    fetch
                 const { data } = await loginUser({
                   onError(err) {
-                    setErrors(err.graphQLErrors[0].extensions.errors)
+                    setErrors &&
+                      setErrors(err.graphQLErrors[0].extensions.errors)
                   },
                   variables: {
                     email: values.email,

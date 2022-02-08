@@ -217,11 +217,7 @@ const Nav = () => {
             </div>
           ) : null}
           <NavLink to="profil" className={classes.navlink}>
-            <Avatar
-              alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
-              className={classes.avatar}
-            />
+            <Avatar alt="Remy Sharp" src="" className={classes.avatar} />
           </NavLink>
           <IconButton
             edge="start"

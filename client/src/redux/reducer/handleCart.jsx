@@ -10,10 +10,16 @@ const handleCart = (state = cart, action) => {
       if (exist) {
         // incremente la qty de  1
         return state.map((x) =>
-          x.product.id === product.product.id ? { ...x, qty: x.qty + 1 } : x
+          x.product.id === product.product.id
+            ? {
+                ...x,
+                qty: x.qty + 1,
+              }
+            : x
         )
       } else {
         const product = action.payload
+
         return [
           ...state,
           {
@@ -24,7 +30,6 @@ const handleCart = (state = cart, action) => {
       }
       break
 
-    // !! corrigé fonction delItem
     case 'DELITEM':
       const exist1 = state.find((x) => x.product.id === product.product.id)
       if (exist1.qty === 1) {

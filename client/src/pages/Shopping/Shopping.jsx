@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
   titleTotal: {
     marginRight: theme.spacing(1),
@@ -64,7 +66,7 @@ const Shopping = () => {
 
   const state = useSelector((state) => state.handleCart)
   const dispatch = useDispatch()
-
+  console.log(state)
   // calcul tout le panier
   let totalShopping = () => {
     let totalArray = []
@@ -112,9 +114,7 @@ const Shopping = () => {
                   <div className={classes.paydContainer}>
                     <div className={classes.total}>
                       <h3 className={classes.titleTotal}>Total</h3>
-                      <p className={classes.price}>
-                        <p>{totalShopping()}</p>
-                      </p>
+                      <p className={classes.price}>{totalShopping()}</p>
                     </div>
                   </div>
                   <div className={classes.btn}>

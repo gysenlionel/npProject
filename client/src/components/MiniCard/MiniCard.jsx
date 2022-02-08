@@ -10,7 +10,8 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    border: '1px solid #000000',
+    boxShadow: '0 1px 5px rgba(0,0,0,0.4)',
+    backgroundColor: '#fff',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(1),
     borderRadius: '4px',

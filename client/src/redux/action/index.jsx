@@ -1,5 +1,5 @@
 //  add item to cart
-export const addCart = (product, qtyMin, qtyMax, getState) => {
+export const addCart = (product, qtyMin, qtyMax) => {
   return {
     type: 'ADDITEM',
     payload: {
@@ -8,8 +8,6 @@ export const addCart = (product, qtyMin, qtyMax, getState) => {
       qtyMax,
     },
   }
-
-  // localStorage.setItem('cart', JSON.stringify(getState().cart))
 }
 
 //  delete item from cart

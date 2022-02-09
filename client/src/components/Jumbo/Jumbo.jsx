@@ -11,8 +11,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: '100vh',
+    height: '110vh',
     display: 'flex',
+    position: 'relative',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
@@ -47,6 +48,21 @@ const useStyles = makeStyles((theme) => ({
 
     color: '#fff',
   },
+
+  titleContainer: {
+    height: theme.spacing(10),
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.800)',
+    // background: 'linear-gradient(to top, rgba(0,0,0,0.800) 0%, #000000 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: '0px',
+  },
+  title: {
+    color: '#DF4F4F',
+  },
 }))
 const Jumbo = () => {
   const classes = useStyles()
@@ -58,7 +74,11 @@ const Jumbo = () => {
           <span className={classes.low}>Low cost</span> tickets
         </h2>
         <p className={classes.everyone}>to share with everyone and enjoy!!!</p>
+
         <Modal />
+      </div>
+      <div className={classes.titleContainer}>
+        <h2 className={classes.title}>Our headliners</h2>
       </div>
     </div>
   )

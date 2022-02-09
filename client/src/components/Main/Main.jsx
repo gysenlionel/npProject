@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   titleContainer: {
     height: theme.spacing(10),
     width: '100%',
-    marginTop: theme.spacing(10),
-    backgroundColor: '#000000',
+
+    backgroundColor: 'rgba(0,0,0,0.800)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#DF4F4F',
   },
   headliners: {
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(6),
   },
   loading: {
     width: '100%',
@@ -55,18 +55,15 @@ const Main = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.titleContainer}>
+      {/* <div className={classes.titleContainer}>
         <h2 className={classes.title}>Our headliners</h2>
-      </div>
+      </div> */}
 
       <div className={classes.headliners}></div>
       <Grid container sx={{ pt: 0 }} className={classes.background}>
         <Grid item xs={12}>
           <Container maxWidth="lg" className={classes.formContainer}>
             <Grid container spacing={2}>
-              {/* <Grid item lg={3} md={4} xs={6}>
-                <CardComp />
-              </Grid> */}
               {loading ? (
                 <div className={classes.loading}>
                   <Spinner />

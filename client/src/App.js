@@ -19,7 +19,15 @@ import Shopping from "./pages/Shopping/Shopping"
 import Profil from "./pages/Profil/Profil"
 import CardDetails from "./components/CardDetails/CardDetails";
 
+
+import { AuthContext } from './context/auth'
+
+import RequireAuth from "./auth/RequireAuth";
+
 function App() {
+
+  const { user } = React.useContext(AuthContext)
+
   return (
     <div className="App font-telex">
       {/* <ThemeProvider theme={theme}> */}
@@ -27,16 +35,21 @@ function App() {
         <Nav />
 
         <Routes>
+          {/* public routes */}
+
           <Route path="/" element={<Home />} />
           <Route path="signup" element={<FormulaireFormik />} />
           <Route path="signin" element={<Login />} />
           <Route path='news' element={<News />} />
-          <Route path='shopping' element={<Shopping />} />
           <Route path='events' element={<Events />} />
-          <Route path='profil' element={<Profil />} />
 
-          <Route path='events/:id' element={<CardDetails />} />
-          <Route path='/:id' element={<CardDetails />} />
+          {/* protected routes */}
+          <Route element={<RequireAuth />}>
+            <Route path='shopping' element={<Shopping />} />
+            <Route path='profil' element={<Profil />} />
+            <Route path='events/:id' element={<CardDetails />} />
+            <Route path='/:id' element={<CardDetails />} />
+          </Route>
 
 
           <Route path="*" element={<NotFound />} />

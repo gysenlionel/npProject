@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
   },
+  modalContainer: {
+    width: '100%',
+  },
 }))
 
 export default function BasicModal() {

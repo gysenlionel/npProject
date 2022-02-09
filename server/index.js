@@ -24,3 +24,6 @@ mongoose.connect(process.env.DB_USER_PASS, { useNewUrlParser: true })
     .then(res => {
         console.log(`server running at ${res.url}`)
     })
+    .catch(err => {
+        console.error(err)
+    })

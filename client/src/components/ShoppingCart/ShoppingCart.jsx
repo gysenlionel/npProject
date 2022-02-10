@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 // redux
 import { useDispatch } from 'react-redux'
 import { addCart } from '../../redux/action'
+import { useSelector } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core'
 
@@ -96,6 +97,16 @@ const ShoppingCart = ({ fetchedData }) => {
     dispatch(addCart(product, qtyMin, qtyMax))
   }
 
+  const state = useSelector((state) => state.handleCart)
+  const stateNotNull = () => {
+    if (state.length === 0) {
+      return ''
+    } else {
+      return state.length
+    }
+  }
+
+  // push les les prices dans une array
   let price = []
 
   price.push(
@@ -166,7 +177,7 @@ const ShoppingCart = ({ fetchedData }) => {
 
         <div className={classes.button}>
           <BlackButton
-            children="add to"
+            children={`add ${stateNotNull()}`}
             onClick={() => addProduct(fetchedData[0], qtyMin, qtyMax)}
           />
         </div>

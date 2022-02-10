@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import { makeStyles } from '@material-ui/core'
 
-import RedButton from '../Button/RedButton'
-import Login from '../../pages/Login/Login'
+import RedButton from '../../Button/RedButton'
+import Login from '../../../pages/Login/Login'
 import Modal3 from './Modal3'
 
 const useStyles = makeStyles((theme) => ({

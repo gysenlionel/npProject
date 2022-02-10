@@ -87,8 +87,8 @@ const Jumbo = () => {
         </h2>
         {user ? (
           <p className={classes.everyoneConnect}>
-            Welcome <span className={classes.typoRed}>{user.firstname}</span>{' '}
-            check out our <br /> new events
+            <span className={classes.typoRed}>{user.firstname}</span> <br />{' '}
+            check out our new events
           </p>
         ) : (
           <p className={classes.everyone}>

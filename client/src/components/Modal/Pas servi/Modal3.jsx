@@ -5,8 +5,8 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import Login from '../../pages/Login/Login'
-import FormulaireFormik from '../../pages/Formulaire/FormulaireFormik'
+import Login from '../../../pages/Login/Login'
+import FormulaireFormik from '../../../pages/Formulaire/FormulaireFormik'
 import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({

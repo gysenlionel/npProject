@@ -76,7 +76,7 @@ export default function BasicModal() {
         <BootstrapButton variant="contained" disableRipple onClick={handleOpen}>
           Sign
         </BootstrapButton>
-        <NavLink to="signup" className={classes.link}>
+        <NavLink to="/signup" className={classes.link}>
           <BootstrapButton variant="contained" disableRipple>
             Sign up
           </BootstrapButton>

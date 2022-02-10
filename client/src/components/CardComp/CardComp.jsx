@@ -4,11 +4,12 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 
-import testImage from '../../assets/img/test.jpg'
-
 import { makeStyles } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 
+import { AuthContext } from '../../context/auth'
+
+import ModalCon from '../Modal/ModalCon'
 const useStyles = makeStyles((theme) => ({
   card: {
     boxShadow: '0px 1px 5px rgba(0,0,0, 0.4)',
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ImgMediaCard({ name, img, date, priceMin, venue, id }) {
   const classes = useStyles()
+  const { user } = React.useContext(AuthContext)
   return (
     <div className={classes.card}>
       <Card className={classes.allCard}>
@@ -76,12 +78,23 @@ export default function ImgMediaCard({ name, img, date, priceMin, venue, id }) {
             </div>
           </CardContent>
           <div className={classes.cardActions}>
-            <Link to={id} className={classes.link}>
+            {user ? (
+              <Link to={id} className={classes.link}>
+                <div className={classes.more}>
+                  <p>Learn more </p>
+                  <KeyboardArrowRightIcon />
+                </div>
+              </Link>
+            ) : (
+              <ModalCon />
+            )}
+
+            {/* <Link to={id} className={classes.link}>
               <div className={classes.more}>
                 <p>Learn more </p>
                 <KeyboardArrowRightIcon />
               </div>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </Card>

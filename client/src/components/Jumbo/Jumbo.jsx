@@ -2,11 +2,9 @@ import React, { useContext } from 'react'
 
 import { AuthContext } from '../../context/auth'
 
-import { Container, Grid, makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 
 import Modal from '../Modal/Modal'
-import Modal2 from '../Modal/Modal2'
-import Modal3 from '../Modal/Modal3'
 
 import image from '../../assets/img/test6.jpg'
 

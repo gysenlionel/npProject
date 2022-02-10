@@ -1,5 +1,8 @@
+import React, { useContext } from 'react'
+
+import { AuthContext } from '../../context/auth'
+
 import { Container, Grid, makeStyles } from '@material-ui/core'
-import React from 'react'
 
 import Modal from '../Modal/Modal'
 import Modal2 from '../Modal/Modal2'
@@ -67,8 +70,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 const Jumbo = () => {
+  const { user } = useContext(AuthContext)
   const classes = useStyles()
-
+  console.log(user)
   return (
     <div className={classes.container}>
       <div className={classes.jumbo}>
@@ -76,8 +80,7 @@ const Jumbo = () => {
           <span className={classes.low}>Low cost</span> tickets
         </h2>
         <p className={classes.everyone}>to share with everyone and enjoy!!!</p>
-
-        <Modal />
+        {!user && <Modal />}
       </div>
       <div className={classes.titleContainer}>
         <h2 className={classes.title}>Our headliners</h2>

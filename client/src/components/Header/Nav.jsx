@@ -166,7 +166,22 @@ const useStyles = makeStyles((theme) => ({
       width: '100vw',
     },
   },
-  badge: {},
+  helloUserDrawer: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  nameUserDrawer: {
+    textAlign: 'center',
+    color: '#DF4F4F',
+    fontWeight: 'bold',
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
 }))
 
 const Nav = () => {
@@ -201,13 +216,15 @@ const Nav = () => {
               <div className={classes.link}>News</div>
             </div>
           </NavLink>
-          <NavLink to="shopping" className={classes.navlink}>
-            <div className={classes.linksLg}>
-              <BadgeClassic className={classes.badge}>
-                <div className={classes.link}>Shopping List</div>
-              </BadgeClassic>
-            </div>
-          </NavLink>
+          {user && (
+            <NavLink to="shopping" className={classes.navlink}>
+              <div className={classes.linksLg}>
+                <BadgeClassic className={classes.badge}>
+                  <div className={classes.link}>Shopping List</div>
+                </BadgeClassic>
+              </div>
+            </NavLink>
+          )}
         </div>
         <div className={classes.icons}>
           {user ? (
@@ -229,15 +246,27 @@ const Nav = () => {
             <MenuIcon />
           </IconButton>
         </div>
+
+        {/* ************ Drawer ******************** */}
+
         <Drawer
           open={open}
-          // onOpen={() => setOpen(true)}
           onClose={() => setOpen(false)}
           anchor="right"
           classes={{
             paper: classes.drawerPaper,
           }}
         >
+          {user && (
+            <>
+              <div className={classes.helloUserDrawer}>
+                <span>hello</span>
+              </div>
+              <div className={classes.nameUserDrawer}>
+                <span>{user.username}</span>
+              </div>
+            </>
+          )}
           <span className={classes.borderBLastItem}>
             <NavLink to="events" className={classes.navlinksm}>
               <div className={classes.linkDrawer}>
@@ -256,15 +285,17 @@ const Nav = () => {
               </div>
             </NavLink>
           </span>
-          <span className={classes.borderBLastItem}>
-            <NavLink to="shopping" className={classes.navlinksm}>
-              <div className={classes.linkDrawer}>
-                <ListItem className={classes.linkDrawer}>
-                  <div>Shopping list</div>
-                </ListItem>
-              </div>
-            </NavLink>
-          </span>
+          {user && (
+            <span className={classes.borderBLastItem}>
+              <NavLink to="shopping" className={classes.navlinksm}>
+                <div className={classes.linkDrawer}>
+                  <ListItem className={classes.linkDrawer}>
+                    <div>Shopping list</div>
+                  </ListItem>
+                </div>
+              </NavLink>
+            </span>
+          )}
           {/* Changé liens !!! */}
           <span className={classes.borderB}>
             <NavLink to="shopping" className={classes.navlinksm}>

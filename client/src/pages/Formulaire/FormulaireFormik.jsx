@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     minHeight: '100vh',
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(10),
     },

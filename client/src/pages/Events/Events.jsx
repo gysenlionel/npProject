@@ -71,9 +71,6 @@ const Events = () => {
                 />
               </div>
               <Grid container spacing={2}>
-                {/* <Grid item lg={3} md={4} xs={6}>
-                <CardComp />
-              </Grid> */}
                 {loading ? (
                   <div className={classes.loading}>
                     <Spinner />

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: theme.spacing(7),
+    marginTop: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(10),
     },

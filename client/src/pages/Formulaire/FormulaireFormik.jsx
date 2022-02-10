@@ -14,7 +14,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ErrorIcon from '@mui/icons-material/Error'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import CloseIcon from '@mui/icons-material/Close'
 
 import TextfieldWrapper from '../../components/FormUi/Textfield/Textfield'
 import Submit from '../../components/FormUi/Submit/Submit'
@@ -25,6 +25,14 @@ import image from '../../assets/img/test6.jpg'
 const useStyles = makeStyles((theme) => ({
   error: {
     color: '#da1212',
+    margin: '0 !important',
+    padding: '0 !important',
+  },
+  listeError: {
+    minWidth: '0 !important',
+    color: '#da1212',
+    margin: '0 !important',
+    padding: '0 !important',
   },
 
   background: {
@@ -70,11 +78,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
-  arrow: {
-    color: '#595959',
+  close: {
+    color: '#000000',
     cursor: 'pointer',
     '&:hover': {
-      color: '#000000',
+      color: '#DF4F4F',
     },
   },
 }))
@@ -167,10 +175,10 @@ const Formulaire = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <div className={classes.title}>
-                      <NavLink to="/">
-                        <ArrowBackIcon className={classes.arrow} />
-                      </NavLink>
                       <h1 className={classes.sign}>Fill in your details</h1>
+                      <NavLink to="/">
+                        <CloseIcon className={classes.close} />
+                      </NavLink>
                     </div>
                   </Grid>
                   <Grid item xs={6}>
@@ -270,10 +278,13 @@ const Formulaire = () => {
                                 },
                               }}
                             >
-                              <ListItemIcon key={`${value}-icon`}>
+                              <ListItemIcon
+                                key={`${value}-icon`}
+                                className={classes.listeError}
+                              >
                                 <ErrorIcon
                                   key={`${value}-err`}
-                                  className={classes.error}
+                                  className={classes.listeError}
                                 />
                               </ListItemIcon>
 
@@ -309,10 +320,13 @@ const Formulaire = () => {
                                 },
                               }}
                             >
-                              <ListItemIcon key={`${value}-icon`}>
+                              <ListItemIcon
+                                key={`${value}-icon`}
+                                className={classes.listeError}
+                              >
                                 <ErrorIcon
                                   key={`${value}-err`}
-                                  className={classes.error}
+                                  className={classes.listeError}
                                 />
                               </ListItemIcon>
 

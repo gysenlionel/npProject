@@ -13,6 +13,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ErrorIcon from '@mui/icons-material/Error'
+import CloseIcon from '@mui/icons-material/Close'
 
 import TextfieldWrapper from '../../components/FormUi/Textfield/Textfield'
 import Submit from '../../components/FormUi/Submit/Submit'
@@ -23,8 +24,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: '1.2rem',
   },
-  error: {
+  errorIcon: {
     color: '#da1212',
+    margin: '0 !important',
+    padding: '0 !important',
+  },
+  errorItem: {
+    color: '#da1212',
+    margin: '0 !important',
+    padding: '0 !important',
+  },
+  listeError: {
+    minWidth: '0 !important',
   },
 
   login__background: {
@@ -46,8 +57,23 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  close: {
+    color: '#000000',
+    cursor: 'pointer',
+    // marginLeft: 'auto',
+    position: 'absolute',
+    left: '110px',
+    '&:hover': {
+      color: '#DF4F4F',
+    },
+  },
 }))
-const Login = () => {
+const Login = ({ handleClose }) => {
   // context pour data user
   const context = useContext(AuthContext)
   // errors
@@ -106,7 +132,14 @@ const Login = () => {
                   justifyContent="center"
                 >
                   <Grid item xs={12}>
-                    <p className={classes.sign}>Sign in</p>
+                    <div className={classes.title}>
+                      <h1 className={classes.sign}>Sign in</h1>
+
+                      <CloseIcon
+                        className={classes.close}
+                        onClick={handleClose}
+                      />
+                    </div>
                   </Grid>
 
                   <Grid item xs={12}>
@@ -144,17 +177,20 @@ const Login = () => {
                                 },
                               }}
                             >
-                              <ListItemIcon key={`${value}-icon`}>
+                              <ListItemIcon
+                                key={`${value}-icon`}
+                                className={classes.listeError}
+                              >
                                 <ErrorIcon
                                   key={`${value}-err`}
-                                  className={classes.error}
+                                  className={classes.errorIcon}
                                 />
                               </ListItemIcon>
 
                               <ListItemText
                                 key={value}
                                 primary={value}
-                                className={classes.error}
+                                className={classes.errorItem}
                               />
                             </ListItemButton>
                           </ListItem>

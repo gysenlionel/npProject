@@ -295,7 +295,7 @@ const Nav = () => {
                 aria-describedby="modal-modal-description"
               >
                 <Box className={classes.modal}>
-                  <Login />
+                  <Login handleClose={handleClose} />
                 </Box>
               </Modal>
 

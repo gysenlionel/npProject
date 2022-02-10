@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 
 import { makeStyles } from '@material-ui/core'
+import { styled } from '@mui/material/styles'
 
 import Login from '../../pages/Login/Login'
 import Form from '../../pages/Formulaire/FormulaireFormik'
@@ -33,11 +34,30 @@ const useStyles = makeStyles((theme) => ({
 
   link: {
     textDecoration: 'none',
+    marginLeft: theme.spacing(2),
   },
   modalContainer: {
     width: '100%',
   },
 }))
+
+const BootstrapButton = styled(Button)({
+  width: '85px',
+  border: '1px solid #DF4F4F',
+  borderRadius: '2px / 4px',
+  padding: '7px',
+  color: '#DF4F4F',
+  cursor: 'pointer',
+  display: 'flex',
+  justifyContent: 'center',
+  background: 'transparent',
+
+  '&:hover': {
+    color: ' #fff',
+    border: '1px solid  #DF4F4F',
+    backgroundColor: '#DF4F4F',
+  },
+})
 
 export default function BasicModal() {
   const classes = useStyles()
@@ -53,10 +73,13 @@ export default function BasicModal() {
   return (
     <div>
       <div className={classes.sign}>
-        <RedButton onClick={handleOpen}>Sign in</RedButton>
-
+        <BootstrapButton variant="contained" disableRipple onClick={handleOpen}>
+          Sign
+        </BootstrapButton>
         <NavLink to="signup" className={classes.link}>
-          <RedButton>Sign up</RedButton>
+          <BootstrapButton variant="contained" disableRipple>
+            Sign up
+          </BootstrapButton>
         </NavLink>
       </div>
       <Modal
@@ -66,7 +89,7 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box className={classes.modal}>
-          <Login />
+          <Login handleClose={handleClose} />
         </Box>
       </Modal>
     </div>

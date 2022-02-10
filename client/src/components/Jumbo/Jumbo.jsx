@@ -2,6 +2,8 @@ import { Container, Grid, makeStyles } from '@material-ui/core'
 import React from 'react'
 
 import Modal from '../Modal/Modal'
+import Modal2 from '../Modal/Modal2'
+import Modal3 from '../Modal/Modal3'
 
 import image from '../../assets/img/test6.jpg'
 

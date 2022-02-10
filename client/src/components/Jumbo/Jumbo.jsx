@@ -53,6 +53,11 @@ const useStyles = makeStyles((theme) => ({
 
     color: '#fff',
   },
+  everyoneConnect: {
+    fontSize: '1.2rem',
+    color: '#fff',
+    textAlign: 'center',
+  },
 
   titleContainer: {
     height: theme.spacing(10),
@@ -68,18 +73,31 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: '#DF4F4F',
   },
+  typoRed: {
+    color: '#DF4F4F',
+  },
 }))
 const Jumbo = () => {
   const { user } = useContext(AuthContext)
   const classes = useStyles()
-  console.log(user)
+
   return (
     <div className={classes.container}>
       <div className={classes.jumbo}>
         <h2 className={classes.tickets}>
           <span className={classes.low}>Low cost</span> tickets
         </h2>
-        <p className={classes.everyone}>to share with everyone and enjoy!!!</p>
+        {user ? (
+          <p className={classes.everyoneConnect}>
+            Welcome <span className={classes.typoRed}>{user.firstname}</span>{' '}
+            check out our <br /> new events
+          </p>
+        ) : (
+          <p className={classes.everyone}>
+            to share with everyone and enjoy!!!
+          </p>
+        )}
+
         {!user && <Modal />}
       </div>
       <div className={classes.titleContainer}>

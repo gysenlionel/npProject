@@ -120,7 +120,7 @@ const CardDetails = () => {
     })()
   }, [api])
 
-  console.log(fetchedData)
+  // console.log(fetchedData)
   return (
     <div className={classes.container}>
       <Grid container className={classes.container}>

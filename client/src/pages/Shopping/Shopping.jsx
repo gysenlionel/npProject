@@ -66,7 +66,7 @@ const Shopping = () => {
 
   const state = useSelector((state) => state.handleCart)
   const dispatch = useDispatch()
-  console.log(state)
+  // console.log(state)
   // calcul tout le panier
   let totalShopping = () => {
     let totalArray = []

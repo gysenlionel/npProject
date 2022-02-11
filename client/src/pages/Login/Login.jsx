@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '1px 1px 10px grey, -1px -1px 10px grey',
   },
   input: {
+    '& label.Mui-focused': {
+      color: 'black',
+    },
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused fieldset': {
         borderColor: 'black',

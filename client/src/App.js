@@ -38,16 +38,16 @@ function App() {
           {/* public routes */}
 
           <Route path="/" element={<Home />} />
-          <Route path="signup" element={<FormulaireFormik />} />
-          <Route path="signin" element={<Login />} />
-          <Route path='news' element={<News />} />
-          <Route path='events' element={<Events />} />
+          <Route path="/signup" element={<FormulaireFormik />} />
+          <Route path="/signin" element={<Login />} />
+          <Route path='/news' element={<News />} />
+          <Route path='/events' element={<Events />} />
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>
-            <Route path='shopping' element={<Shopping />} />
-            <Route path='profil' element={<Profil />} />
-            <Route path='events/:id' element={<CardDetails />} />
+            <Route path='/shopping' element={<Shopping />} />
+            <Route path='/profil' element={<Profil />} />
+            <Route path='/events/:id' element={<CardDetails />} />
             <Route path='/:id' element={<CardDetails />} />
           </Route>
 

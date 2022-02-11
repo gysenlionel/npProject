@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
@@ -13,8 +14,10 @@ import Avatar from '@mui/material/Avatar'
 import { makeStyles } from '@material-ui/core'
 import logo from '../../assets/logo/logo_t.png'
 
-import BadgeClassic from '../Badge/BadgeClassic'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
+import BadgeXs from '../Badge/BadgeXs'
+import BadgeClassic from '../Badge/BadgeClassic'
 import Login from '../../pages/Login/Login'
 
 import { AuthContext } from '../../context/auth'
@@ -182,9 +185,16 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  shopIcon: {
+    // marginLeft: theme.spacing(25),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
 }))
 
 const Nav = () => {
+  const state = useSelector((state) => state.handleCart)
   const { user, logout } = React.useContext(AuthContext)
 
   const classes = useStyles()
@@ -219,10 +229,19 @@ const Nav = () => {
           {user && (
             <NavLink to="shopping" className={classes.navlink}>
               <div className={classes.linksLg}>
-                <BadgeClassic className={classes.badge}>
+                <BadgeClassic className={classes.badge} right="54">
                   <div className={classes.link}>Shopping List</div>
                 </BadgeClassic>
               </div>
+            </NavLink>
+          )}
+        </div>
+        <div className={classes.shopIcon}>
+          {state.length !== 0 && (
+            <NavLink to="shopping" className={classes.navlink}>
+              <BadgeXs className={classes.badgeXs}>
+                <ShoppingCartIcon />
+              </BadgeXs>
             </NavLink>
           )}
         </div>

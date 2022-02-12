@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core'
 
 import TextfieldNoFormik from '../FormUi/Textfield/TextFieldNoformik'
 import BlackButton from '../Button/BlackButton'
+import ModalPrevent from '../Modal/ModalPrevent'
 
 import { totalPrice } from '../../utils/totalPrice'
 
@@ -86,11 +87,9 @@ const useStyles = makeStyles((theme) => ({
 const ShoppingCart = ({ fetchedData }) => {
   const classes = useStyles()
 
-  // items pour le total
-  const [items, setItems] = useState([])
-
   const [qtyMin, setQtyMin] = useState('0')
   const [qtyMax, setQtyMax] = useState('0')
+  const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch()
   const addProduct = (product, qtyMin, qtyMax) => {
@@ -98,6 +97,7 @@ const ShoppingCart = ({ fetchedData }) => {
   }
 
   const state = useSelector((state) => state.handleCart)
+  // ne pas afficher les qte dans le btn quand valeur du shoppingList(state.handleCart) est de 0
   const stateNotNull = () => {
     if (state.length === 0) {
       return ''
@@ -106,13 +106,43 @@ const ShoppingCart = ({ fetchedData }) => {
     }
   }
 
-  // push les les prices dans une array
+  const inputProtect = (value) => {
+    let valueMin = parseFloat(value.qtyMin)
+    let valueMax = parseFloat(value.qtyMax)
+    if (
+      (valueMin !== 0 && valueMin >= 1 && valueMin <= 10 && valueMax === 0) ||
+      (valueMin === 0 && valueMax !== 0 && valueMax >= 1 && valueMax <= 10) ||
+      (valueMin !== 0 &&
+        valueMin >= 1 &&
+        valueMin <= 10 &&
+        valueMax !== 0 &&
+        valueMax >= 1 &&
+        valueMax <= 10)
+    ) {
+      return addProduct(fetchedData[0], qtyMin, qtyMax)
+    } else {
+      return setShowModal(true)
+    }
+  }
+
+  // push  les prices dans une array
   let price = []
 
   price.push(
     fetchedData[0]?.priceRanges[0].min,
     fetchedData[0]?.priceRanges[0].max
   )
+
+  // regex pour input
+  // a éxecuter dans onChange  ?
+  const regexNumber = (value) => {
+    const NumtoTen = /^([1-9]|10)$/
+    if (value.match(NumtoTen)) {
+      return value
+    } else {
+      return ''
+    }
+  }
 
   return (
     <div className={classes.shoppingCart}>
@@ -178,8 +208,9 @@ const ShoppingCart = ({ fetchedData }) => {
         <div className={classes.button}>
           <BlackButton
             children={`add ${stateNotNull()}`}
-            onClick={() => addProduct(fetchedData[0], qtyMin, qtyMax)}
+            onClick={() => inputProtect({ qtyMin, qtyMax })}
           />
+          {showModal ? <ModalPrevent setShowModal={setShowModal} /> : null}
         </div>
       </div>
 

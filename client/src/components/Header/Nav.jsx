@@ -14,9 +14,6 @@ import Avatar from '@mui/material/Avatar'
 import { makeStyles } from '@material-ui/core'
 import logo from '../../assets/logo/logo_t.png'
 
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-
-import BadgeXs from '../Badge/BadgeXs'
 import BadgeClassic from '../Badge/BadgeClassic'
 import Login from '../../pages/Login/Login'
 
@@ -185,11 +182,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  shopIcon: {
-    // marginLeft: theme.spacing(25),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
+  shopLength: {
+    color: '#DF4F4F',
+    fontWeight: 'bold',
   },
 }))
 
@@ -236,15 +231,7 @@ const Nav = () => {
             </NavLink>
           )}
         </div>
-        <div className={classes.shopIcon}>
-          {state.length !== 0 && (
-            <NavLink to="shopping" className={classes.navlink}>
-              <BadgeXs className={classes.badgeXs}>
-                <ShoppingCartIcon />
-              </BadgeXs>
-            </NavLink>
-          )}
-        </div>
+
         <div className={classes.icons}>
           {user ? (
             <div className={classes.username}>
@@ -309,7 +296,14 @@ const Nav = () => {
               <NavLink to="shopping" className={classes.navlinksm}>
                 <div className={classes.linkDrawer}>
                   <ListItem className={classes.linkDrawer}>
-                    <div>Shopping list</div>
+                    <div>
+                      Shopping list{' '}
+                      {state.length !== 0 && (
+                        <span className={classes.shopLength}>
+                          {state.length}
+                        </span>
+                      )}
+                    </div>
                   </ListItem>
                 </div>
               </NavLink>

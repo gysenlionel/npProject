@@ -94,12 +94,7 @@ export default function BasicModal({ setShowModal }) {
           <CloseIcon className={classes.close} onClick={handleModal} />
           <div className={classes.content}>
             <img src={logo} alt="" className={classes.img} />
-            <p>
-              You must fill in the fields to add this event to your basket.{' '}
-              <br />
-              Your selection must be between 1 and 10 tickets per price
-              category.
-            </p>
+            <p>You must fill in the fields to add this event to your basket.</p>
           </div>
         </Box>
       </Modal>

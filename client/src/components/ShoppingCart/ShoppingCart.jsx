@@ -133,17 +133,6 @@ const ShoppingCart = ({ fetchedData }) => {
     fetchedData[0]?.priceRanges[0].max
   )
 
-  // regex pour input
-  // a éxecuter dans onChange  ?
-  const regexNumber = (value) => {
-    const NumtoTen = /^([1-9]|10)$/
-    if (value.match(NumtoTen)) {
-      return value
-    } else {
-      return ''
-    }
-  }
-
   return (
     <div className={classes.shoppingCart}>
       <div className={classes.shoppingCart__container}>
@@ -156,7 +145,18 @@ const ShoppingCart = ({ fetchedData }) => {
             placeholder="Tickets"
             className={classes.input}
             value={qtyMin}
-            onChange={(e) => setQtyMin(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value >= 1 && e.target.value <= 10) {
+                if (e.target.value === '010') {
+                  let result = e.target.value.slice(1)
+                  setQtyMin(result)
+                } else {
+                  setQtyMin(e.target.value)
+                }
+              } else {
+                setQtyMin('0')
+              }
+            }}
           />
         </div>
         {fetchedData[0].priceRanges[0].min !==
@@ -168,7 +168,18 @@ const ShoppingCart = ({ fetchedData }) => {
               placeholder="Tickets"
               className={classes.input}
               value={qtyMax}
-              onChange={(e) => setQtyMax(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value >= 1 && e.target.value <= 10) {
+                  if (e.target.value === '010') {
+                    let result = e.target.value.slice(1)
+                    setQtyMax(result)
+                  } else {
+                    setQtyMax(e.target.value)
+                  }
+                } else {
+                  setQtyMax('0')
+                }
+              }}
             />
           </div>
         ) : null}
@@ -176,7 +187,7 @@ const ShoppingCart = ({ fetchedData }) => {
       <div className={classes.totalContainer}>
         <h4>Total</h4>
         <p>
-          {qtyMin !== '0'
+          {qtyMin !== '0' && qtyMin !== ''
             ? `${qtyMin} x ${
                 fetchedData[0].priceRanges[0].min &&
                 fetchedData[0].priceRanges[0].min

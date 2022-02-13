@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+import axios from 'axios'
+
 import { Container, Grid, makeStyles } from '@material-ui/core'
 
 import Spinner from '../../components/Spinner/Spinner'
@@ -103,20 +105,22 @@ const CardDetails = () => {
   https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.REACT_APP_TICKETS_KEY}&id=${id}&locale=*&size=20&countryCode=BE&segmentId=KZFzniwnSyZfZ7v7nJ`
   useEffect(() => {
     ;(async function () {
-      let results = await fetch(api)
-      let data = await results.json()
-      updateFetchedData(data._embedded.events)
-      setLoading(false)
-      // évite problème undefined
-      setFacebook(
-        data._embedded.events[0]._embedded.attractions[0].externalLinks
-          .facebook[0].url
-      )
+      try {
+        const response = await axios.get(api)
+        updateFetchedData(response.data._embedded.events)
+        setLoading(false)
+        setFacebook(
+          response.data._embedded.events[0]._embedded.attractions[0]
+            .externalLinks.facebook[0].url
+        )
 
-      setYoutube(
-        data._embedded.events[0]._embedded.attractions[0].externalLinks
-          .youtube[0].url
-      )
+        setYoutube(
+          response.data._embedded.events[0]._embedded.attractions[0]
+            .externalLinks.youtube[0].url
+        )
+      } catch (error) {
+        console.error(error)
+      }
     })()
   }, [api])
 

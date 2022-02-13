@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import axios from 'axios'
+
 import { Container, Grid, makeStyles } from '@material-ui/core'
 
 import CardComp from '../CardComp/CardComp'
@@ -46,10 +48,13 @@ const Main = () => {
   https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.REACT_APP_TICKETS_KEY}&locale=*&countryCode=BE&segmentId=KZFzniwnSyZfZ7v7nJ`
   useEffect(() => {
     ;(async function () {
-      let results = await fetch(api)
-      let data = await results.json()
-      updateFetchedData(data)
-      setLoading(false)
+      try {
+        const response = await axios(api)
+        updateFetchedData(response.data)
+        setLoading(false)
+      } catch (error) {
+        console.error(error)
+      }
     })()
   }, [api])
 

@@ -84,7 +84,7 @@ const Shopping = () => {
       )
     let newArray = totalArray.reduce((acc, val) => acc.concat(val), [])
     let result = newArray.reduce((a, b) => a + b, 0)
-    return result + '€'
+    return result.toFixed(2) + '€'
   }
 
   return (

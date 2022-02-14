@@ -10,7 +10,7 @@ import TextfieldNoFormik from '../FormUi/Textfield/TextFieldNoformik'
 import BlackButton from '../Button/BlackButton'
 import ModalPrevent from '../Modal/ModalPrevent'
 
-import { totalPrice } from '../../utils/totalPrice'
+import { totalPrice, totalPriceFixed } from '../../utils/totalPrice'
 
 const useStyles = makeStyles((theme) => ({
   shoppingCart__container: {
@@ -195,7 +195,7 @@ const ShoppingCart = ({ fetchedData }) => {
             : null}
         </p>
         <p>
-          {qtyMax !== '0'
+          {qtyMax !== '0' && qtyMax !== ''
             ? `${qtyMax} x ${
                 fetchedData[0].priceRanges[0].max &&
                 fetchedData[0].priceRanges[0].max
@@ -206,7 +206,7 @@ const ShoppingCart = ({ fetchedData }) => {
 
         {qtyMax !== '0' || qtyMin !== '0' ? (
           <h4 className={classes.total}>
-            {totalPrice(
+            {totalPriceFixed(
               qtyMin,
               qtyMax,
               fetchedData[0].priceRanges[0].min,

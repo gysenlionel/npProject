@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { delCart } from '../../redux/action/index'
 
-import { totalPrice } from '../../utils/totalPrice'
+import { totalPrice, totalPriceFixed } from '../../utils/totalPrice'
 
 import { Container, Grid, makeStyles } from '@material-ui/core'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -126,7 +126,7 @@ const MiniCard = ({ data, qtyMin, qtyMax }) => {
                   </div>
                   <div>
                     <h4 className={classes.total}>
-                      {totalPrice(
+                      {totalPriceFixed(
                         qtyMin,
                         qtyMax,
                         data.priceRanges[0].min,

@@ -3,7 +3,8 @@ An event website eshop concert and music news
 ## Table of Contents
 * [Mockups](#mockups)
 * [Graphic charter](#graphic-charter)
-
+* [Techno](#techno)
+* [Screenshot](#screenshot)
 ## Mockups
 ### Home
 ![home](https://user-images.githubusercontent.com/90910874/150365190-8c121730-2843-42f5-bbd1-9afb3021d2eb.png)

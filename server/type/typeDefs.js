@@ -104,6 +104,7 @@ type Mutation{
     likePost(postId: ID!): Post! 
     createTransaction(TransactionInput:TransactionInput) : Transaction
     createEvent(EventInput:EventInput) : Transaction
+    
 }
 
 `

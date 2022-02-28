@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: '110vh',
+    backgroundPosition: 'center',
+    height: '100vh',
     display: 'flex',
     position: 'relative',
     flexWrap: 'wrap',
@@ -82,25 +83,25 @@ const Jumbo = () => {
   return (
     <div className={classes.container}>
       <div className={classes.jumbo}>
-        <h2 className={classes.tickets}>
-          <span className={classes.low}>Low cost</span> tickets
-        </h2>
         {user ? (
           <p className={classes.everyoneConnect}>
             <span className={classes.typoRed}>{user.firstname}</span> <br />{' '}
             check out our new events
           </p>
         ) : (
-          <p className={classes.everyone}>
-            to share with everyone and enjoy!!!
-          </p>
+          <>
+            <h2 className={classes.tickets}>
+              <span className={classes.low}>Low cost</span> tickets
+            </h2>
+            <p className={classes.everyone}>to share with everyone!!!</p>
+          </>
         )}
 
         {!user && <Modal />}
       </div>
-      <div className={classes.titleContainer}>
+      {/* <div className={classes.titleContainer}>
         <h2 className={classes.title}>Our headliners</h2>
-      </div>
+      </div> */}
     </div>
   )
 }

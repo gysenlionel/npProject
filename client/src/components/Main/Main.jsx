@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(10),
     width: '100%',
 
-    backgroundColor: 'rgba(0,0,0,0.800)',
+    // backgroundColor: 'rgba(0,0,0,0.800)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#DF4F4F',
   },
   headliners: {
-    marginBottom: theme.spacing(6),
+    marginBottom: theme.spacing(1),
   },
   loading: {
     width: '100%',
@@ -60,9 +60,9 @@ const Main = () => {
 
   return (
     <div className={classes.container}>
-      {/* <div className={classes.titleContainer}>
+      <div className={classes.titleContainer}>
         <h2 className={classes.title}>Our headliners</h2>
-      </div> */}
+      </div>
 
       <div className={classes.headliners}></div>
       <Grid container sx={{ pt: 0 }} className={classes.background}>

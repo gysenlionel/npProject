@@ -225,7 +225,7 @@ const Nav = () => {
             <NavLink to="shopping" className={classes.navlink}>
               <div className={classes.linksLg}>
                 <BadgeClassic className={classes.badge} right="54">
-                  <div className={classes.link}>Shopping List</div>
+                  <div className={classes.link}>Cart</div>
                 </BadgeClassic>
               </div>
             </NavLink>
@@ -233,12 +233,12 @@ const Nav = () => {
         </div>
 
         <div className={classes.icons}>
-          {user ? (
+          {/* {user ? (
             <div className={classes.username}>
-              Hello,{' '}
+              Hello{' '}
               <span className={classes.usernamename}>{user.username}</span>
             </div>
-          ) : null}
+          ) : null} */}
           <NavLink to="profil" className={classes.navlink}>
             <Avatar alt="Remy Sharp" src="" className={classes.avatar} />
           </NavLink>
@@ -274,7 +274,11 @@ const Nav = () => {
             </>
           )}
           <span className={classes.borderBLastItem}>
-            <NavLink to="events" className={classes.navlinksm}>
+            <NavLink
+              to="events"
+              className={classes.navlinksm}
+              onClick={() => setOpen(false)}
+            >
               <div className={classes.linkDrawer}>
                 <ListItem>
                   <div>Events</div>
@@ -283,7 +287,11 @@ const Nav = () => {
             </NavLink>
           </span>
           <span className={classes.borderBLastItem}>
-            <NavLink to="news" className={classes.navlinksm}>
+            <NavLink
+              to="news"
+              className={classes.navlinksm}
+              onClick={() => setOpen(false)}
+            >
               <div className={classes.linkDrawer}>
                 <ListItem className={classes.linkDrawer}>
                   <div>News</div>
@@ -293,11 +301,15 @@ const Nav = () => {
           </span>
           {user && (
             <span className={classes.borderBLastItem}>
-              <NavLink to="shopping" className={classes.navlinksm}>
+              <NavLink
+                to="shopping"
+                className={classes.navlinksm}
+                onClick={() => setOpen(false)}
+              >
                 <div className={classes.linkDrawer}>
                   <ListItem className={classes.linkDrawer}>
                     <div>
-                      Shopping list{' '}
+                      Cart{' '}
                       {state.length !== 0 && (
                         <span className={classes.shopLength}>
                           {state.length}
@@ -311,14 +323,35 @@ const Nav = () => {
           )}
           {/* Changé liens !!! */}
           <span className={classes.borderB}>
-            <NavLink to="shopping" className={classes.navlinksm}>
+            <NavLink
+              to="/"
+              className={classes.navlinksm}
+              onClick={() => setOpen(false)}
+            >
+              <div className={classes.navlinksm}>
+                <ListItem>
+                  <div>Home</div>
+                </ListItem>
+              </div>
+            </NavLink>
+          </span>
+          <span className={classes.borderB}>
+            <NavLink
+              to="shopping"
+              className={classes.navlinksm}
+              onClick={() => setOpen(false)}
+            >
               <ListItem>
                 <div>About us</div>
               </ListItem>
             </NavLink>
           </span>
           <span className={classes.borderB}>
-            <NavLink to="shopping" className={classes.navlinksm}>
+            <NavLink
+              to="shopping"
+              className={classes.navlinksm}
+              onClick={() => setOpen(false)}
+            >
               <ListItem>
                 <div>Contact us</div>
               </ListItem>
@@ -327,7 +360,12 @@ const Nav = () => {
           {user ? (
             <span className={classes.borderB}>
               <ListItem onClick={logout}>
-                <div className={classes.disconnect}>Logout</div>
+                <div
+                  className={classes.disconnect}
+                  onClick={() => setOpen(false)}
+                >
+                  Logout
+                </div>
               </ListItem>
             </span>
           ) : (
@@ -344,7 +382,7 @@ const Nav = () => {
               </Modal>
 
               <span className={classes.borderB}>
-                <ListItem>
+                <ListItem onClick={() => setOpen(false)}>
                   <div onClick={handleOpen} className={classes.login}>
                     Login
                   </div>

@@ -35,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
   test: {
     textAlign: '-webkit-center',
   },
+  bar: {
+    [theme.breakpoints.up('sm')]: {
+      width: '8rem',
+      height: '2px',
+      margin: '10px',
+      backgroundColor: '#000',
+    },
+  },
 }))
 const Main = () => {
   const classes = useStyles()
@@ -61,7 +69,9 @@ const Main = () => {
   return (
     <div className={classes.container}>
       <div className={classes.titleContainer}>
+        <span className={classes.bar}></span>
         <h2 className={classes.title}>Our headliners</h2>
+        <span className={classes.bar}></span>
       </div>
 
       <div className={classes.headliners}></div>

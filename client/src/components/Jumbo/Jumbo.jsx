@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#DF4F4F',
   },
   typoRed: {
+    fontSize: '1.5rem',
     color: '#DF4F4F',
   },
 }))

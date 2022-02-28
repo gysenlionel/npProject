@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
     float: 'left',
     textAlign: 'center',
-    fontSize: '0.9rem',
+    fontSize: '1.1rem',
     borderRadius: '4px',
     backgroundColor: '#000000',
     color: '#fff',
-    padding: '1px',
+    padding: '8px',
     marginRight: theme.spacing(2),
     marginLeft: theme.spacing(2),
   },

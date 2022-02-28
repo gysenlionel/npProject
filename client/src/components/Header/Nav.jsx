@@ -382,7 +382,7 @@ const Nav = () => {
               </Modal>
 
               <span className={classes.borderB}>
-                <ListItem onClick={() => setOpen(false)}>
+                <ListItem>
                   <div onClick={handleOpen} className={classes.login}>
                     Login
                   </div>

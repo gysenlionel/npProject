@@ -163,13 +163,23 @@ const CardDetails = () => {
                         </p>
                         <p>
                           <span className={classes.badge}>Price</span>&nbsp;
-                          <span className={classes.info}>
-                            {fetchedData[0]?.priceRanges[0].min}
-                          </span>{' '}
-                          à{' '}
-                          <span className={classes.info}>
-                            {fetchedData[0]?.priceRanges[0].max}€ / TVAC
-                          </span>
+                          {fetchedData[0].priceRanges ? (
+                            <>
+                              <span className={classes.info}>
+                                {fetchedData[0]?.priceRanges[0].min}
+                              </span>
+                              <span>à</span>
+                              <span className={classes.info}>
+                                {fetchedData[0]?.priceRanges[0].max}€ / TVAC
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <span className={classes.info}>
+                                no communicate
+                              </span>
+                            </>
+                          )}
                         </p>
                         <p>
                           <span className={classes.badge}>Venue</span>&nbsp;
@@ -189,7 +199,9 @@ const CardDetails = () => {
                     </div>
                   </Grid>
                   <div className={classes.ShoppingCart}>
-                    <ShoppingCart fetchedData={fetchedData} />
+                    {fetchedData[0].priceRanges ? (
+                      <ShoppingCart fetchedData={fetchedData} />
+                    ) : null}
                   </div>
                   <Grid item xs={12}>
                     <div>

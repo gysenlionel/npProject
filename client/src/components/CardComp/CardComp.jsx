@@ -73,7 +73,11 @@ export default function ImgMediaCard({ name, img, date, priceMin, venue, id }) {
             <h3>{name}</h3>
             <div className={classes.content}>
               <p>date: {date}</p>
-              <p>price: {priceMin}€</p>
+              {priceMin === 'no communicate' ? (
+                <p>price: {priceMin}</p>
+              ) : (
+                <p>price: {priceMin}€</p>
+              )}
               <p>venue: {venue}</p>
             </div>
           </CardContent>

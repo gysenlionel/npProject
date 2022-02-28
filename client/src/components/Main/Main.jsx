@@ -89,7 +89,9 @@ const Main = () => {
                       name={e.name}
                       img={e.images[8].url}
                       date={e.dates.start.localDate}
-                      priceMin={e.priceRanges[0].min}
+                      priceMin={
+                        e.priceRanges ? e.priceRanges[0].min : 'no communicate'
+                      }
                       venue={e._embedded.venues[0].name}
                       id={e.id}
                     />

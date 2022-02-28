@@ -18,8 +18,8 @@ const News = () => {
 
   return (
     <div className={classes.new__container}>
-      <div>new news news news news news News</div>
-      <StripeContainer />
+      <div>work in progress</div>
+      {/* <StripeContainer /> */}
     </div>
   )
 }

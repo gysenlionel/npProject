@@ -42,8 +42,8 @@ const Events = () => {
   let [search, setSearch] = useState('')
   let [fetchedData, updateFetchedData] = useState([])
 
-  let [priceMin, setPriceMin] = useState('not reported')
-  let [priceMax, setPriceMax] = useState('not reported')
+  // let [priceMin, setPriceMin] = useState('not reported')
+  // let [priceMax, setPriceMax] = useState('not reported')
   // destructuration data
   let { page, _embedded, _links } = fetchedData
 
@@ -96,16 +96,11 @@ const Events = () => {
                         name={e.name}
                         img={e.images[8].url}
                         date={e.dates.start.localDate}
-                        priceMin={(() => {
-                          if (
-                            e.priceRanges[0].min !== 'undefined' ||
-                            e.priceRanges[0].min !== 'null'
-                          ) {
-                            return e.priceRanges[0].min
-                          } else {
-                            return 0
-                          }
-                        })()}
+                        priceMin={
+                          e.priceRanges
+                            ? e.priceRanges[0].min
+                            : 'no communicate'
+                        }
                         venue={e._embedded.venues[0].name}
                         id={e.id}
                       />
